@@ -1,0 +1,26 @@
+{
+  "name": "theatre-management",
+  "version": "1.0.0",
+  "description": "App to manage movie scheduling and ticket booking in a theatre ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minujames/theatre-management.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/minujames/theatre-management/issues"
+  },
+  "homepage": "https://github.com/minujames/theatre-management#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "mysql2": "^1.4.2",
+    "sequelize": "^4.22.0"
+  }
+}
