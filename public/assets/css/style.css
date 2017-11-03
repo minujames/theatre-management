@@ -1,0 +1,15 @@
+body {
+  font-family: Arial;
+  color: #C3E3F7;
+}
+
+.jumbotron {
+  background: #0b7fae;
+  margin: 7%;
+  padding: 7%;
+  opacity: .8;
+}
+
+#link {
+  color: #C3E3F7;
+}
