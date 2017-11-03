@@ -1,0 +1,115 @@
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Theatre Management Admin Page</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Add a Movie</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">View Schedule</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">View all</a></li>
+      </ul>
+    </div>
+  </nav><br><br><br>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-1"></div>
+
+      <div class="col-sm-2">
+        <div class="row">
+          <h2>Current Movies</h2>
+        </div>
+        <div class="row">
+          <ul class="list-group" id="current">
+            {{#each movies}}
+              <button class="list-group-item" data-value={{moviename}}>{{moviename}}</button>
+            {{/each}}
+          </ul>
+        </div><br>
+
+        <div class="row">
+          <h2>Coming soon</h2>
+        </div>
+        <div class="row">
+          <ul class="list-group" id="comingsoon">
+            {{#each movies}}
+              <button class="list-group-item" data-value={{moviename}}>{{moviename}}</button>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-sm-1"></div>
+
+      <div class="col-sm-7">
+        <div id="adminLandingShowScreen">
+          <div class="row">
+            <h1 id="adminLandingScreenMovieTitle">Click a Movie Title</h1>
+          </div><br>
+
+          <h1>Screen 1</h1>
+          <div id="adminLandingScreen1">
+            <table>
+              <thead>
+                <tr>
+                  <th><h3>Start Date |</h3></th>
+                  <th><h3>End Date |</h3></th>
+                  <th><h3>Time</h3></th>
+                </tr>
+              </thead>
+              <tbody id="tableCurrent">
+              </tbody>
+            </table>
+          </div><br>
+
+          <h1>Screen 2</h1>
+          <div id="adminLandingScreen2">
+            <table>
+              <thead>
+                <tr>
+                  <th><h3>Start Date |</h3></th>
+                  <th><h3>End Date |</h3></th>
+                  <th><h3>Time</h3></th>
+                </tr>
+              </thead>
+              <tbody id="tableComingSoon">
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <script>
+    var current = ["currentmovie1", "currentmovie2", "currentmovie3", "currentmovie4", "currentmovie5"];
+    current.forEach(function(e) {
+      var temp = $("<button>").attr("class", "list-group-item").attr("data-value", e).text(e);
+      $("#current").append(temp);
+    })
+
+    var comingsoon = ["comingsoon1", "comingsoon2", "comingsoon3", "comingsoon4", "comingsoon5"];
+    comingsoon.forEach(function(e) {
+      var temp = $("<button>").attr("class", "list-group-item").attr("data-value", e).text(e);
+      $("#comingsoon").append(temp);
+    })
+
+    var schedule = [{screen: "screen1", startdate: "11/1", enddate: "11/11", time: "9:00am"}, {screen: "screen1", startdate: "11/1", enddate: "11/11", time: "12:00pm"}, {screen: "screen2", startdate: "11/2", enddate: "11/11", time: "9:00am"}, {screen: "screen2", startdate: "11/2", enddate: "11/11", time: "12:00pm"}]
+    $(".list-group-item").on("click", function(event) {
+      event.preventDefault();
+      $("#tableCurrent").empty();
+      $("#tableComingSoon").empty();
+      $("#adminLandingScreenMovieTitle").html($(this).attr("data-value"))
+      schedule.forEach(function(e) {
+        var newrow = $("<tr>")
+        var start = $("<td>").html("<h4>"+e.startdate+"</h4>")
+        var end = $("<td>").html("<h4>"+e.enddate+"</h4>")
+        var time = $("<td>").html("<h4>"+e.time+"</h4>")
+        newrow.append(start, end, time)
+        console.log(newrow)
+        if (e.screen === "screen1") {
+          $("#tableCurrent").append(newrow)
+        } else {
+          $("#tableComingSoon").append(newrow)
+        }
+      });
+    })
+  </script>
