@@ -16,6 +16,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.ENUM,
       values: ['user', 'admin', 'supervisor']
     }
+  },
+  {
+    timestamps: false
   });
 
   User.associate = function(models) {

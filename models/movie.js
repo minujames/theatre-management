@@ -8,10 +8,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATEONLY,
       allowNull: false
     }
+  },
+  {
+    timestamps: false
   });
 
   Movie.associate = function(models) {
-    Movie.hasMany(models.MovieScreenDate);
+    Movie.hasMany(models.MovieScreenDateShow);
   };
 
   return Movie;
