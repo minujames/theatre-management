@@ -6,19 +6,10 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  // Reservation.associate = function(models) {
-  //   Reservation.hasMany(models.MovieScreenDateShow, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-
-  //   Reservation.hasMany(models.User, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
+  Reservation.associate = function(models) {
+    Reservation.belongsTo(models.User);
+    Reservation.belongsTo(models.MovieScreenDateShow);
+  };
 
   return Reservation;
 };
