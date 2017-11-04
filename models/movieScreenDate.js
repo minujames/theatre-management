@@ -4,24 +4,16 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATEONLY,
       allowNull: false
     }
+  },
+  {
+    timestamps: false
   });
 
-  MovieScreenDate.associate = function(models) {
-    MovieScreenDate.hasMany(models.MovieScreenDateShow);
-  };
-
   // MovieScreenDate.associate = function(models) {
-  //   MovieScreenDate.hasMany(models.Screen, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-
-  //   MovieScreenDate.hasMany(models.Movie, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
+  //   MovieScreenDate.belongsTo(models.Screen);
+  //   MovieScreenDate.belongsTo(models.Movie);
+    
+  //   MovieScreenDate.hasMany(models.MovieScreenDateShow);
   // };
 
   return MovieScreenDate;
