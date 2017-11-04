@@ -43,7 +43,7 @@
       <div class="col-sm-7">
         <div id="adminLandingShowScreen">
           <div class="row">
-            <h1 id="adminLandingScreenMovieTitle">Click a Movie Title</h1>
+            <h1 id="adminLandingScreenMovieTitle"></h1>
           </div><br>
 
           <h1>Screen 1</h1>
@@ -76,6 +76,7 @@
             </table>
           </div>
         </div>
+      </div>
     </div>
   </div>
 
@@ -97,14 +98,14 @@
       event.preventDefault();
       $("#tableCurrent").empty();
       $("#tableComingSoon").empty();
-      $("#adminLandingScreenMovieTitle").html($(this).attr("data-value"))
+      var title = $("<p>").html($(this).attr("data-value")).attr("class", "animated flash")
+      $("#adminLandingScreenMovieTitle").html(title)
       schedule.forEach(function(e) {
         var newrow = $("<tr>")
         var start = $("<td>").html("<h4>"+e.startdate+"</h4>")
         var end = $("<td>").html("<h4>"+e.enddate+"</h4>")
         var time = $("<td>").html("<h4>"+e.time+"</h4>")
         newrow.append(start, end, time)
-        console.log(newrow)
         if (e.screen === "screen1") {
           $("#tableCurrent").append(newrow)
         } else {
@@ -112,4 +113,7 @@
         }
       });
     })
+
+    var title = $("<p>").html("Click a Movie Title!").attr("class", "animated flash")
+    $("#adminLandingScreenMovieTitle").html(title)
   </script>
