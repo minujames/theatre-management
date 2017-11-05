@@ -15,7 +15,12 @@ module.exports = function(sequelize, DataTypes) {
 
   Screen.associate = function(models) {
     Screen.hasMany(models.MovieScreenDateShow);
+    // Screen.belongsToMany(models.ShowTime, {through: models.MovieScreenDate});
   };
+
+  // Screen.associate = function(models) {
+  //   Screen.hasMany(models.MovieScreenDateShow);
+  // };
 
   return Screen;
 };

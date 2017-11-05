@@ -30,6 +30,7 @@ INSERT INTO theatre_db.MovieScreenDateShows (date, movieId, screenId, ShowTimeId
 INSERT INTO theatre_db.MovieScreenDateShows (date, movieId, screenId, ShowTimeId) 
   VALUES ("2017-11-17", 1, 2, 1);
 
+
 INSERT INTO theatre_db.MovieScreenDateShows (date, movieId, screenId, ShowTimeId) 
   VALUES ("2017-11-15", 2, 1, 2);
 

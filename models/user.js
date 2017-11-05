@@ -25,5 +25,9 @@ module.exports = function(sequelize, DataTypes) {
     User.hasMany(models.Reservation);
   };
 
+  // User.associate = function(models) {
+  //   User.hasMany(models.Reservation);
+  // };
+
   return User;
 };

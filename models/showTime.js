@@ -11,7 +11,19 @@ module.exports = function(sequelize, DataTypes) {
 
   ShowTime.associate = function(models) {
     ShowTime.hasMany(models.MovieScreenDateShow);
+    // Screen.belongsToMany(models.ShowTime, {through: models.MovieScreenDate});
   };
+
+  // ShowTime.associate = function(models) {
+    // ShowTime.belongsToMany(models.Movie, {through: models.MovieScreenDate});
+    // ShowTime.belongsToMany(models.Screen, {through: models.MovieScreenDate});
+
+    // ShowTime.hasMany(models.MovieScreenDate);
+  // };
+
+  // ShowTime.associate = function(models) {
+  //   ShowTime.hasMany(models.MovieScreenDateShow);
+  // };
 
   return ShowTime;
 };

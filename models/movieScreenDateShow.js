@@ -14,8 +14,16 @@ module.exports = function(sequelize, DataTypes) {
     MovieScreenDateShow.belongsTo(models.Movie);
     MovieScreenDateShow.belongsTo(models.ShowTime);
 
-    MovieScreenDateShow.hasMany(models.Reservation);
+    MovieScreenDateShow.hasMany(models.Reservation)
   };
+
+  // MovieScreenDateShow.associate = function(models) {
+  //   MovieScreenDateShow.belongsTo(models.Screen);
+  //   MovieScreenDateShow.belongsTo(models.Movie);
+  //   MovieScreenDateShow.belongsTo(models.ShowTime);
+
+  //   MovieScreenDateShow.hasMany(models.Reservation);
+  // };
   
   return MovieScreenDateShow;
 };
