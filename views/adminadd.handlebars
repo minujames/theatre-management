@@ -5,7 +5,6 @@
       <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
       <li class="nav-item active"><a class="nav-link" href="#">Add a Movie</a></li>
       <li class="nav-item"><a class="nav-link" href="#">View Schedule</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">View all</a></li>
     </ul>
   </div>
 </nav><br><br><br>
@@ -15,7 +14,7 @@
     <div class="col-sm-1"></div>
 
     <div class="col-sm-2">
-      <div class="row" class="animated flash"><h1>Add a Movie</h1></div><br>
+      <div class="row"><h1 class="animated flash">Add a Movie</h1></div><br>
       <div class="row">
         <form>
           <div class="form-group">
@@ -27,7 +26,7 @@
             <input type="text" class="form-control" id="releaseyear" placeholder="Release Year">
           </div>
 
-          <br><button id="getinfobutton" class="btn btn-info">Get Info</button> <button type="addbutton" class="btn btn-info">Add</button>
+          <br><button id="getinfobutton" class="btn btn-info">Get Info</button>
         </form>
       </div>
     </div>
@@ -39,8 +38,44 @@
     <div class="col-sm-1"></div>
 
     <div class="col-sm-6">
-      <div id="addmoviesection"></div>
+      <div id="addmoviesection">
+        <h1 id="movietoadd"></h1>
+        <form>
+          <div class="form-group">
+            <label for="screenselect">Select Screen:</label>
+            <select id="screenselect" class="form-control">
+              <option>Screen 1</option>
+              <option>Screen 2</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="startselect endselect">Select Dates:</label>
+            <input id="startselect" type="date">
+            <input id="endselect" type="date">
+          </div>
+
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="timeA" value="timeA"> 9:00AM
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="timeB" value="trueB"> 12:00PM
+            </label>
+          </div>
+          <div class="form-check form-check-inline disabled">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="timeC" value="trueC"> 6:00PM
+            </label>
+          </div>
+
+          <button id="addmoviebutton" class="btn btn-info animated flash">Add!</button>
+        </form>
+      </div>
     </div>
+
   </div>
 
   <div class="row">
@@ -49,7 +84,56 @@
     <div class="col-sm-4">
       <ul class="list-group" id="movieinfohere">
       </ul>
+      <button id="addbutton" class="btn btn-info animated flash">Add</button>
     </div>
 
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $("#startselect").datepicker();
+    $("#endselect").datepicker();
+  });
+
+  $("#addbutton").hide();
+  $("#addmoviesection").hide();
+
+  $("#getinfobutton").on("click", function(event) {
+    event.preventDefault();
+    $("#movieinfohere").empty();
+    var movie = $("#movietitle").val().trim();
+    $("#movietitle").val("")
+
+    $.ajax({
+      url: "https://www.omdbapi.com/?t=" + movie + "&y=&plot&apikey=40e9cece",
+      method: "GET"
+    }).done(function(response) {
+      $("#movieposterhere").attr("src", response.Poster);
+      var title = $("<li>").html("<h4>Title: " + response.Title + "</h4>");
+      var release = $("<li>").html("<h4>Release Date: " + response.Released + ", Rating: " + response.Rated + "</h4>");
+      var genre = $("<li>").html("<h4>Genre: " + response.Genre);
+      var actors = $("<li>").html("<h4>Actors: " + response.Actors + "</h4>");
+      var plot = $("<li>").html("<h4>Plot: " + response.Plot + "</h4>");
+      $("#movieinfohere").append(title, release, genre, actors, plot);
+      $("#movietoadd").text("Adding " + response.Title).attr("class", "animated flash");
+      $("#addbutton").show();
+    })
+  })
+
+  $("#addbutton").on("click", function(event) {
+    event.preventDefault();
+      $("#addmoviesection").show();
+  })
+
+  $("#addmoviebutton").on("click", function(event) {
+    event.preventDefault();
+    var screen = $("#screenselect").val();
+    var start = $("#startselect").val();
+    var end = $("#endselect").val();
+    var timeA = $("#timeA:checked").val();
+    var timeB = $("#timeB:checked").val();
+    var timeC = $("#timeC:checked").val();
+    console.log(screen, start, end, timeA, timeB, timeC)
+  })
+</script>
