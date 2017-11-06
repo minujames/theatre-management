@@ -1,5 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
   var Reservation = sequelize.define("Reservation", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     seats: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -8,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
 
   Reservation.associate = function(models) {
     Reservation.belongsTo(models.User);
-    Reservation.belongsTo(models.MovieScreenDateShow);
+    Reservation.belongsTo(models.Show);
   };
 
   return Reservation;

@@ -4,9 +4,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    releaseDate: {
-      type: DataTypes.DATEONLY,
-      allowNull: false
+    releaseYear: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   },
   {
@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Movie.associate = function(models) {
-    Movie.hasMany(models.MovieScreenDateShow);
+    Movie.hasMany(models.Show);
   };
 
   return Movie;
