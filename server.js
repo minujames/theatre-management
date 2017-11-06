@@ -6,6 +6,7 @@ var expressHandleBars = require("express-handlebars");
 var movieRoutes = require("./controllers/moviesController.js");
 var schedulesRoutes = require("./controllers/schedulesController.js");
 var usersRoutes = require("./controllers/usersController.js");
+var fasRoutes = require("./controllers/fasController.js")
 
 
 // Declaring port
@@ -32,6 +33,7 @@ app.set("view engine", "handlebars");
 app.use("/", movieRoutes);
 app.use("/", schedulesRoutes);
 app.use("/", usersRoutes);
+app.use("/", fasRoutes)
 
 // Listening on declared port
 db.sequelize.sync({ force: true }).then(function() {
