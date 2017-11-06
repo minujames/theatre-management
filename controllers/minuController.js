@@ -5,9 +5,7 @@ var db = require("../models");
 
 // api/showtime
 router.get("/api/showtime", function(request, response) {
-  db.ShowTime.findAll({
-    raw: true
-  }).then(function(result) {
+  db.ShowTime.findAll({}).then(function(result) {
     response.json(result);
   });
 });
@@ -52,7 +50,33 @@ router.get("/api/show/:screenId/:startDate/:endDate", function(request, response
         [db.Sequelize.Op.between]: [request.params.startDate, request.params.endDate],
       }
     },
-    include: [db.Movie, db.Screen, db.ShowTime],
+    include: [db.Movie, db.Screen, db.ShowTime]
+  }).then(function(result) {
+    response.json(result);
+  });
+});
+
+
+// movie/running
+router.get("/api/movie/running", function(request, response) {
+  db.Movie.findAll({
+    group: ["id"],
+    include: [{
+      model: db.Show,
+      required: false,
+      attributes: [
+        [db.Sequelize.fn('MIN', db.Sequelize.col('date')), "minDate"],
+        [db.Sequelize.fn('MAX', db.Sequelize.col('date')), "maxDate"],
+      ],
+    }],
+    having: db.Sequelize.where(
+      db.Sequelize.fn('now'), {
+        [db.Sequelize.Op.between]: [db.Sequelize.fn('MIN', db.Sequelize.col('date')), db.Sequelize.fn('MAX', db.Sequelize.col('date'))]
+      }
+      // db.Sequelize.fn('MIN', db.Sequelize.col('date')), {
+      //   $lte: request.params.currentDate
+      // }
+    ),
     raw: true
   }).then(function(result) {
     response.json(result);
@@ -60,34 +84,85 @@ router.get("/api/show/:screenId/:startDate/:endDate", function(request, response
 });
 
 
-// movie/running/2017-11-15
-router.get("/api/movie/running/:currentDate", function(request, response) {
-  
-});
-
-
-//movie/comingup/2017-11-15
-router.get("/api/movie/comingsoon/:currentDate", function(request, response) {
-  
-});
-
-
-// movie/2017-11-15
-router.get("/api/movie/:date", function(request, response) {
+// movie/comingsoon/scheduled
+router.get("/api/movie/comingsoon", function(request, response) {
   db.Movie.findAll({
-    attributes: [db.Sequelize.fn('DISTINCT', db.Sequelize.col('title')), 'id'],
+    group: ["id"],
     include: [{
       model: db.Show,
-      required: true,
-      where: { date: request.params.date},
-      attributes: [],
+      required: false,
+      attributes: [
+        [db.Sequelize.fn('MIN', db.Sequelize.col('date')), "minDate"],
+        [db.Sequelize.fn('MAX', db.Sequelize.col('date')), "maxDate"],
+      ],
     }],
-    raw:true
+    having: db.Sequelize.where(
+      db.Sequelize.fn('now'), {
+        [db.Sequelize.Op.lt]: db.Sequelize.fn('MIN', db.Sequelize.col('date'))
+      }
+    ),
+    raw: true
+  }).then(function(result) {
+    response.json(result);
+  });
+});
+
+//movie/comingsoon/unscheduled
+router.get("/api/movie/unscheduled", function(request, response) {
+  db.Movie.findAll({
+    group: ["id"],
+    include: [{
+      model: db.Show,
+      required: false,
+      attributes: [
+        [db.Sequelize.fn('MIN', db.Sequelize.col('date')), "minDate"],
+        [db.Sequelize.fn('MAX', db.Sequelize.col('date')), "maxDate"],
+      ],
+    }],
+    having: db.Sequelize.where(
+      db.Sequelize.fn('MIN', db.Sequelize.col('date')), {
+        [db.Sequelize.Op.eq]: null
+      }
+    ),
+    raw: true
   }).then(function(result) {
     response.json(result);
   });
 });
 
 
+// [user page] movies playing on a particular date
+// /api/movie/2017-11-15
+router.get("/api/movie/:date", function(request, response) {
+  db.Movie.findAll({
+    attributes: ['id', 'title'],
+    include: [{
+      model: db.Show,
+      required: true,
+      where: { date: request.params.date}
+      // attributes: [],
+    }]
+  }).then(function(result) {
+    response.json(result);
+  });
+});
+
+
+// [user page] shows for a movie on a particular date
+// /api/show/2017-11-15/1
+router.get("/api/show/:date/:movieId", function(request, response) {
+  console.log(request.params.date, request.params.movieId);
+
+  db.Show.findAll({
+    attributes: ["date"],
+    where: {
+      date: request.params.date,
+      MovieId: request.params.movieId
+    },
+    include: [db.Movie, db.Screen, db.ShowTime]
+  }).then(function(result) {
+    response.json(result);
+  });
+});
 
 module.exports = router;
