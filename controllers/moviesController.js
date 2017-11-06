@@ -4,7 +4,8 @@ var router = express.Router();
 
 var db = require("../models");
 
-router.get("/movies", function(request, response) {
+router.post("/movies", function(request, response) {
+  console.log(request.body);
   response.json({controller: "movies"});
 });
 

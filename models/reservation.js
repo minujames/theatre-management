@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
 
   Reservation.associate = function(models) {
     Reservation.belongsTo(models.User);
-    Reservation.belongsTo(models.MovieScreenDateShow);
+    Reservation.belongsTo(models.Show);
   };
 
   return Reservation;

@@ -14,13 +14,14 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Screen.associate = function(models) {
-    Screen.hasMany(models.MovieScreenDateShow);
-    // Screen.belongsToMany(models.ShowTime, {through: models.MovieScreenDate});
+    Screen.belongsToMany(models.ShowTime, {
+      through: {
+        model: models.Show,
+        unique: false
+      },
+      foreignKey: 'screenId'
+    });
   };
-
-  // Screen.associate = function(models) {
-  //   Screen.hasMany(models.MovieScreenDateShow);
-  // };
 
   return Screen;
 };

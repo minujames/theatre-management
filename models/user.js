@@ -22,12 +22,13 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   User.associate = function(models) {
-    User.hasMany(models.Reservation);
+    User.belongsToMany(models.Show,{
+      through: {
+        model: models.Reservation,
+        unique: false
+      }
+    });
   };
-
-  // User.associate = function(models) {
-  //   User.hasMany(models.Reservation);
-  // };
 
   return User;
 };
