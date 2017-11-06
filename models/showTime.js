@@ -9,8 +9,15 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: false
   });
 
+
   ShowTime.associate = function(models) {
-    ShowTime.hasMany(models.MovieScreenDateShow);
+    ShowTime.belongsToMany(models.Screen, {
+      through: {
+        model: models.Show,
+        unique: false
+      },
+      foreignKey: 'showtimeId'
+    });
   };
 
   return ShowTime;
