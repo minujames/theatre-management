@@ -11,7 +11,7 @@
   <div class="container">
     <div class="row main-wrapper">
       <div class="col-md-12">
-        <input id="date" required>
+        <input id="date" data-date={{date}}>
       </div>
     </div>
 
@@ -32,6 +32,7 @@
       <div class="col-md-5 pageSections" id="summaryDiv">
         <div class="row">
           <div class="col-md-12">
+            <img id="cinema" src="/assets/images/cinema.jpg"></img>
           </div>
         </div>
       </div>
@@ -55,21 +56,29 @@
   <script>
 
   $(document).ready(function() {
-    var currentDate = moment().format("MM-DD-YYYY");
-    $("#date").val(currentDate);
-    // getShows(currentDate);
+    var selectedDate = $("#date").data("date");
+    console.log("selectedDate", selectedDate);
+
+    // var currentDate = moment(selectedDate, "YYYY-MM-DD").format("MM-DD-YYYY")
+    // console.log(currentDate);
+    // moment().format("MM-DD-YYYY");
+    $("#date").val(selectedDate);
 
     $('#date').datepicker({
       todayHighlight: true,
-      format: 'mm-dd-yyyy',
+      format: 'yyyy-mm-dd',
       startDate: '0',
       autoclose: true
     }).on('changeDate', function(e) {
-      var dateSelected = $("#date").val().trim();
-      console.log(dateSelected);
-      // getShows(dateSelected);
 
-      
+      var dateSelected = $("#date").val().trim();
+      // var dateFormatted = moment(dateSelected, "MM-DD-YYYY").format("YYYY-MM-DD");
+      console.log(dateSelected);
+
+      console.log(window.location.href);
+      var windowUrl = window.location.href.split("?")[0];
+      var url = windowUrl + "?date=" + dateSelected ;
+      window.location.href = url;
     });
 
     // minDate: new Date(2017, 11, ),
@@ -85,19 +94,20 @@
     }  
 
     $("li.movie").on("click", function(event){
-      // var id = $(this).data("id");
-      // var title = $(this).data("title");
-      // console.log(id, title);
+      var id = $(this).data("id");
+      var title = $(this).data("title");
+      console.log(id, title);
       
-      // $.ajax({
-      //   url: "https://www.omdbapi.com/?t=" + title + "&y=&plot&apikey=40e9cece",
-      //   method: "GET"
-      // }).done(function(response) {
-      //   var div = $("<div>");
-      //   var img = $("<img id='poster'>").attr("src", response.Poster);
-      //   div.append(img);
-      //   $("#summaryDiv").append(div);
-      // });
+      $.ajax({
+        url: "https://www.omdbapi.com/?t=" + title + "&y=&plot&apikey=40e9cece",
+        method: "GET"
+      }).done(function(response) {
+        $("#summaryDiv").empty();
+        var div = $("<div>");
+        var img = $("<img id='poster'>").attr("src", response.Poster);
+        div.append(img);
+        $("#summaryDiv").append(div);
+      });
 
       $.get( "/adminlanding" , function(data) {
       });

@@ -21,19 +21,23 @@ router.get("/adminlanding", function(request, response) {
 });
 
 router.get("/userlanding", function(request, response) {
-  console.log(".....", request.params.date);
-  if(request.params.date === undefined){
-    request.params.date = "2017-11-15";
+
+  var date = "";
+  if(request.query.date === undefined){
+    date = "2017-11-15";
     // moment().format("YYYY-MM-DD");
   }
-  console.log(request.params.date);
+  else{
+    date = request.query.date;
+  }
+  console.log("........date........", date);
 
   db.Movie.findAll({
     attributes: ['id', 'title'],
     include: [{
       model: db.Show,
       required: true,
-      where: { date: request.params.date}
+      where: { date: date}
     }]
   }).then(function(result) {
 
@@ -52,9 +56,12 @@ router.get("/userlanding", function(request, response) {
 
       var reservations = result;
 
+      console.log(date);
+
       response.render("userlanding_new", {
         movies: movies, 
-        reservations: reservations
+        reservations: reservations,
+        date: date
       });
     });
   });
