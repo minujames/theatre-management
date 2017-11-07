@@ -35,7 +35,7 @@ app.set("view engine", "handlebars");
 app.use("/", movieRoutes);
 app.use("/", schedulesRoutes);
 app.use("/", usersRoutes);
-app.use("/minu", minuRoutes);
+app.use("/theatre", minuRoutes);
 
 // Listening on declared port
 db.sequelize.sync({ force: false }).then(function() {

@@ -16,6 +16,7 @@ INSERT INTO theatre_db.ShowTimes (name) VALUES ("6.00 pm");
 INSERT INTO theatre_db.Movies (title, releaseYear) VALUES ("frozen", "2013");
 INSERT INTO theatre_db.Movies (title, releaseYear) VALUES ("finding nemo", "2003");
 INSERT INTO theatre_db.Movies (title, releaseYear) VALUES ("moana", "2016");
+INSERT INTO theatre_db.Movies (title, releaseYear) VALUES ("gladiator", "2000");
 
 INSERT INTO theatre_db.Users (name, userName, passWord, role) VALUES ("admin", "admin", "admin", "admin");
 INSERT INTO theatre_db.Users (name, userName, passWord, role) VALUES ("john doe", "john", "password", "user");
