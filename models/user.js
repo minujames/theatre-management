@@ -6,7 +6,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     userName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true,
     },
     passWord: {
       type: DataTypes.STRING,
