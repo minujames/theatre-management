@@ -33,7 +33,9 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: {
+     secure: true
+     }
 }));
 // app.use(passport.initialize());
 // app.use(passport.session());
@@ -44,6 +46,12 @@ app.set("view engine", "handlebars");
 // app.enable('view cache');
 
 // Setting the root path
+<<<<<<< HEAD
+app.use("/movie", movieRoutes);
+app.use("/schedules", schedulesRoutes);
+app.use("/users", usersRoutes);
+app.use("/minu", minuRoutes);
+=======
 
 app.use("/", movieRoutes);
 app.use("/", schedulesRoutes);
@@ -51,6 +59,7 @@ app.use("/", usersRoutes);
 app.use("/theatre", minuRoutes);
 app.use("/", testRoutes);
 
+>>>>>>> master
 
 // Listening on declared port
 db.sequelize.sync({ force: false }).then(function() {
