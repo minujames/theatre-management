@@ -1,28 +1,33 @@
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Theatre Management</a>
   </nav><br><br><br><br>
 
   <div class="container">
     <div class="jumbotron">
-      <h1 class="animated flash">Sign Up!</h1><br>
+      <h1 class="animated flash">{{title}}</h1><br>
+      {{#if errors}}
+        {{#each errors}}
+          {{this.errors}}
+        {{/each}}
+      {{/if}}
 
-      <form>
-        <div class="form-group">
+      <form method = "POST" action = "/users/signup">
+        <div class="form-group" >
           <label for="username" class="animated flash">Username:</label>
-          <input type="username" class="form-control" id="inputusername" placeholder="Enter username">
+          <input type="username" class="form-control" id="inputusername" placeholder="Enter username" name = "username">
         </div>
 
         <div class="form-group">
           <label for="password" class="animated flash">Password</label>
-          <input type="password" class="form-control" id="inputpassword" placeholder="Password">
+          <input type="password" class="form-control" id="inputpassword1" placeholder="Password" name = "password1">
         </div>
 
         <div class="form-group">
           <label for="password" class="animated flash">Verify Password</label>
-          <input type="password" class="form-control" id="inputpassword" placeholder="Re-enter Password">
+          <input type="password" class="form-control" id="inputpassword2" placeholder="Re-enter Password" name = "password2">
         </div><br>
 
-        <button type="login" id="login" class="btn btn-info">Sign Up!</button>
+        <input type="submit" id="signup" class="btn btn-info">Sign Up!</input>
       </form><br><br>
     </div>
   </div>
