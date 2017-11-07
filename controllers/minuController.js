@@ -18,6 +18,16 @@ router.get("/api/showtime", function(request, response) {
 
 //--------------------------------MOVIE----------------------------------------
 
+router.get("/api/movie/exists/:title", function(request, response) {
+  db.Movie.findAll({
+    where: {
+      title: request.params.title
+    }
+  }).then(function(result) {
+    response.json(result);
+  });
+});
+
 
 // [admin add/schedule page]
 // Adds a movie to the database 

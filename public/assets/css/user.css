@@ -14,3 +14,12 @@
 .pageSections{
   width: 100%;
 }
+
+#cinema{
+  width: 400px;
+  height: 400px;
+}
+
+.space{
+  margin-left: 15px;
+}

@@ -26,9 +26,9 @@ router.get("/signup", function(request,response){
   response.render("signup");
 });
 
-router.get("/userlanding", function(request,response){
-  response.render("userlanding");
-});
+// router.get("/userlanding", function(request,response){
+//   response.render("userlanding");
+// });
 
 module.exports = router;
   

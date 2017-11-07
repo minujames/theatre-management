@@ -1,7 +1,9 @@
 <li class="list-group-item shows movie">
   <section>Movie: {{Show.Movie.title}}</section>
-  <section>date: {{Show.date}}</section>
-  <scetion>Screen: {{Show.Screen.name}}</section>
-  <section>Show Time: {{Show.ShowTime.name}}</section>
+  <section>
+    <span>{{Show.date}}</span>
+    <span class="space">{{Show.Screen.name}}</span>
+    <span class="space">{{Show.ShowTime.name}}</span>
+  </span>
   <section>Seats reserved: {{seats}}</section>
 </li>
