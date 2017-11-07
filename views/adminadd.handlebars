@@ -1,139 +1,239 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Theatre Management Admin Page</a>
-  <div class="collapse navbar-collapse">
-    <ul class="navbar-nav">
-      <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-      <li class="nav-item active"><a class="nav-link" href="#">Add a Movie</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">View Schedule</a></li>
-    </ul>
-  </div>
-</nav><br><br><br>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-1"></div>
-
-    <div class="col-sm-2">
-      <div class="row"><h1 class="animated flash">Add a Movie</h1></div><br>
-      <div class="row">
-        <form>
-          <div class="form-group">
-            <label for="movietitle">Movie Title:</label>
-            <input type="text" class="form-control" id="movietitle" placeholder="Enter Title">
-          </div>
-          <div class="form-group">
-            <label for="releaseyear">Release Year:</label>
-            <input type="text" class="form-control" id="releaseyear" placeholder="Release Year">
-          </div>
-
-          <br><button id="getinfobutton" class="btn btn-info">Get Info</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="col-sm-2">
-      <img src="#" id="movieposterhere">
-    </div>
-
-    <div class="col-sm-1"></div>
-
-    <div class="col-sm-6">
-      <div id="addmoviesection">
-        <h1 id="movietoadd"></h1>
-        <form>
-          <div class="form-group">
-            <label for="screenselect">Select Screen:</label>
-            <select id="screenselect" class="form-control">
-              <option>Screen 1</option>
-              <option>Screen 2</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="startselect endselect">Select Dates:</label>
-            <input id="startselect" type="date">
-            <input id="endselect" type="date">
-          </div>
-
-          <div class="form-check form-check-inline">
-            <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" id="timeA" value="timeA"> 9:00AM
-            </label>
-          </div>
-          <div class="form-check form-check-inline">
-            <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" id="timeB" value="trueB"> 12:00PM
-            </label>
-          </div>
-          <div class="form-check form-check-inline">
-            <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" id="timeC" value="trueC"> 6:00PM
-            </label>
-          </div>
-
-          <button id="addmoviebutton" class="btn btn-info animated flash">Add!</button>
-        </form>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="row">
-    <div class="col-sm-1"></div>
-
-    <div class="col-sm-4">
-      <ul class="list-group" id="movieinfohere">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Theatre Management Admin Page</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+        <li class="nav-item active"><a class="nav-link" href="#">Add a Movie</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">View Schedule</a></li>
       </ul>
-      <button id="addbutton" class="btn btn-info animated flash">Add</button>
     </div>
+  </nav><br><br>
 
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-1"></div>
+
+      <div class="col-sm-2">
+        <div class="row"><h1 class="animated flash">Add a Movie</h1></div><br>
+        <div class="row">
+          <form>
+            <div class="form-group">
+              <label for="movietitle">Movie Title:</label>
+              <input type="text" class="form-control" id="movietitle" placeholder="Enter Title">
+            </div>
+            <div class="form-group">
+              <label for="releaseyear">Release Year:</label>
+              <input type="text" class="form-control" id="releaseyear" placeholder="Release Year">
+            </div>
+
+            <br><button id="getinfobutton" class="btn btn-info">Get Info</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-sm-2">
+        <img src="#" id="movieposterhere">
+      </div>
+
+      <div class="col-sm-1"></div>
+
+      <div class="col-sm-5">
+        <ul class="list-group" id="movieinfohere">
+        </ul><br>
+        <button id="addbutton" class="btn btn-info animated flash">Add</button>
+        <button id="schedulebutton" class="btn btn-info animated flash">Schedule</button>
+      </div>
+
+    </div><br>
+
+    <div class="row">
+      <div class="col-sm-1"></div>
+      
+      <div class="col-sm-4">
+        <div id="addmoviesection">
+          <h1 id="movietoadd"></h1><br>
+          <form>
+            <div class="form-inline">
+              <label for="screenselect">Select Screen:</label>
+              <select id="screenselect" class="form-control" style="width: auto">
+                <option>1</option>
+                <option>2</option>
+              </select>
+            </div><br>
+
+            <div class="form-group">
+              <label for="startselect endselect">Select Dates:</label>
+              <input id="startselect" type="date">
+              <input id="endselect" type="date">
+            </div><br>
+
+            <button id="checkschedulebutton" class="btn btn-info animated flash">Check Schedule</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-sm-1"></div>
+
+      <div class="col-sm-5">
+        <div id="scheduletable">
+          <table class="table table-bordered">
+            <thead><tr>
+                <th>Date</th>
+                <th>9:00am</th>
+                <th>2:00pm</th>
+                <th>6:00pm</th></tr>
+            </thead>
+            <tbody id="newtablerowshere">
+            </tbody>
+          </table>
+          
+          <button id="submitschedule" class="btn btn-info animated flash">Confirm Schedule</button>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
 
-<script>
-  $(document).ready(function() {
-    $("#startselect").datepicker();
-    $("#endselect").datepicker();
-  });
+  <script>
+    function reset() {
+      $("#scheduletable").hide();
+      $("#addbutton").hide();
+      $("#schedulebutton").hide();
+      $("#addmoviesection").hide();
+    }
 
-  $("#addbutton").hide();
-  $("#addmoviesection").hide();
+    function createTable(screen, start, end, data) {
+      $("#newtablerowshere").empty();
+      var startDate = new Date(start);
+      var endDate = new Date(end);
+      for (var i = startDate; i <= endDate; i = new Date(i.setDate(i.getDate() + 1))) {
+        var currdate = (i.getMonth() + 1) + "-" + (i.getDate() + 1) + "-" +  i.getFullYear();
+        var time1 = $("<button>").attr("class", "sche btn btn-default").attr("data-date", currdate).attr("data-time", 1).attr("data-screen", screen).text(currdate + " 9:00am");
+        var time2 = $("<button>").attr("class", "sche btn btn-default").attr("data-date", currdate).attr("data-time", 2).attr("data-screen", screen).text(currdate + " 2:00pm");
+        var time3 = $("<button>").attr("class", "sche btn btn-default").attr("data-date", currdate).attr("data-time", 3).attr("data-screen", screen).text(currdate + " 6:00pm");
+        data.forEach(function(e) {
+          var nextdate = new Date(e.date)
+          var nextdate1 = ((nextdate.getMonth() + 1) + "-" + (nextdate.getDate() + 1) + "-" +  nextdate.getFullYear());
+          if (nextdate1 === currdate && e.screenId === parseInt(screen)) {
+            switch (e["ShowTime.id"]) {
+              case 1:
+                time1 = $("<h3>").text(e["Movie.title"]);
+                break;
+              case 2:
+                time2 = $("<h3>").text(e["Movie.title"]);
+                break;
+              case 3:
+                time3 = $("<h3>").text(e["Movie.title"]);
+                break;
+            }
+          }
+        })
+        var newrow = $("<tr>")
+        var tablestart = $("<td>").text((i.getMonth() + 1) + "-" + (i.getDate() + 1) + "-" +  i.getFullYear());
+        var tabletime1 = $("<td>").html(time1);
+        var tabletime2 = $("<td>").html(time2);
+        var tabletime3 = $("<td>").html(time3);
+        newrow.append(tablestart, tabletime1, tabletime2, tabletime3);
+        $("#newtablerowshere").append(newrow);
+      }
+      enable();
+    }
 
-  $("#getinfobutton").on("click", function(event) {
-    event.preventDefault();
-    $("#movieinfohere").empty();
-    var movie = $("#movietitle").val().trim();
-    $("#movietitle").val("")
+    var globalTitle;
+    var globalreleaseYear;
+    var globalMovieId;
 
-    $.ajax({
-      url: "https://www.omdbapi.com/?t=" + movie + "&y=&plot&apikey=40e9cece",
-      method: "GET"
-    }).done(function(response) {
-      $("#movieposterhere").attr("src", response.Poster);
-      var title = $("<li>").html("<h4>Title: " + response.Title + "</h4>");
-      var release = $("<li>").html("<h4>Release Date: " + response.Released + ", Rating: " + response.Rated + "</h4>");
-      var genre = $("<li>").html("<h4>Genre: " + response.Genre);
-      var actors = $("<li>").html("<h4>Actors: " + response.Actors + "</h4>");
-      var plot = $("<li>").html("<h4>Plot: " + response.Plot + "</h4>");
-      $("#movieinfohere").append(title, release, genre, actors, plot);
-      $("#movietoadd").text("Adding " + response.Title).attr("class", "animated flash");
-      $("#addbutton").show();
+    $("#getinfobutton").on("click", function(event) {
+      event.preventDefault();
+      reset();
+      $("#movieinfohere").empty();
+      var movie = $("#movietitle").val().trim();
+      $("#movietitle").val("")
+
+      $.ajax({
+        url: "https://www.omdbapi.com/?t=" + movie + "&y=&plot&apikey=40e9cece",
+        method: "GET"
+      }).done(function(response) {
+        console.log(response)
+        $("#movieposterhere").attr("src", response.Poster);
+        var title = $("<li>").html("<h4>Title: " + response.Title + "</h4>");
+        var runtime = $("<li>").html("<h4>Runtime: " + response.Runtime + "</h4>");
+        var release = $("<li>").html("<h4>Release Date: " + response.Released + ", Rating: " + response.Rated + "</h4>");
+        var genre = $("<li>").html("<h4>Genre: " + response.Genre);
+        var actors = $("<li>").html("<h4>Actors: " + response.Actors + "</h4>");
+        var plot = $("<li>").html("<h4>Plot: " + response.Plot + "</h4>");
+        $("#movieinfohere").append(title, runtime, release, genre, actors, plot);
+        $("#movietoadd").text("Scheduling " + response.Title).attr("class", "animated flash");
+        globalTitle = response.Title;
+        globalreleaseYear = response.Year;
+        var added = false;
+        //check if movie is in db. if it is, change added to true, and store movieid in globalMovieId
+        if (added) {
+          $("#schedulebutton").show();
+        } else {
+          $("#addbutton").show();
+        }
+      })
     })
-  })
 
-  $("#addbutton").on("click", function(event) {
-    event.preventDefault();
+    $("#addbutton").on("click", function(event) {
+      event.preventDefault();
+      $.post("/theatre/api/movies", {title: globalTitle, releaseYear: globalreleaseYear})
+      $("#addbutton").hide();
+      $("#schedulebutton").show();
+    })
+
+    $("#schedulebutton").on("click", function(event) {
+      event.preventDefault();
       $("#addmoviesection").show();
-  })
+      //get request search by movie title and get movieid
+      // $.get("/route", function(data) {
+      //   globalMovieId = data[0].MovieId;
+      // })
+    })
 
-  $("#addmoviebutton").on("click", function(event) {
-    event.preventDefault();
-    var screen = $("#screenselect").val();
-    var start = $("#startselect").val();
-    var end = $("#endselect").val();
-    var timeA = $("#timeA:checked").val();
-    var timeB = $("#timeB:checked").val();
-    var timeC = $("#timeC:checked").val();
-    console.log(screen, start, end, timeA, timeB, timeC)
-  })
-</script>
+    $("#checkschedulebutton").on("click", function(event) {
+      event.preventDefault();
+      var screen = $("#screenselect").val();
+      var start = $("#startselect").val();
+      var end = $("#endselect").val();
+      console.log(screen, start, end);
+      var url = "/theatre/api/show/" + screen + "/" + start + "/" + end
+      //ex. api/show/1/2017-11-14/2017-11-16
+      //get req to url. store result in global var called globalData
+      $.get(url, function(data) {
+        console.log(data);
+      createTable(screen, start, end, data);
+      })
+      $("#scheduletable").show();
+    })
+
+    function enable() {
+      $(".sche").unbind("click").on("click", function(event) {
+        event.preventDefault();
+        console.log("click")
+        if($(this).hasClass("btn-default")) {
+          $(this).removeClass("btn-default");
+          $(this).addClass("btn-danger");
+        } else if($(this).hasClass("btn-danger")) {
+          $(this).addClass("btn-default");
+          $(this).removeClass("btn-danger");
+        }
+      })
+    }
+
+    $("#submitschedule").on("click", function(event) {
+      event.preventDefault();
+
+      $(".btn-danger").each(function() {
+        var tempdate = $(this).attr("data-date");
+        var temptime = $(this).attr("data-time");
+        var tempscreen = $(this).attr("data-screen")
+        // console.log(globaltitle, tempdate, temptime, tempscreen);
+        var tempobj = {MovieId: globalMovieId, date: tempdate, showtimeId: temptime, screenId: tempscreen};
+        $.post("/theatre/api/shows", tempobj);
+      })
+    })
+
+    reset();
+  </script>
