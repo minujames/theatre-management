@@ -24,18 +24,18 @@ router.get("/signup", function (request, response) {
 router.post("/signup", function (request, response) {
   console.log(request.body);
   //input validation
-  request.checkBody('username','username feild cannot be empty').notEmpty();
-  request.checkBody('username','username must be 4-15 charecters long').len(4,15);
-  request.checkBody('password','password must be 8 to 100 charecters long').len(8,100);
-  request.checkBody('password1','password must include one lowercase letter,one uppercase letter,a number and a special charecter').matches(("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"));
-  request.checkBody('inputpassword1','password must include one lowercase letter,one uppercase letter,a number and a special charecter').matches(("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"));
-  request.checkBody('inputpassword2','password does not match').equals(request.body.password);
-  const errors = request.validationErrors();
+  // request.checkBody('username','username feild cannot be empty').notEmpty();
+  // request.checkBody('username','username must be 4-15 charecters long').len(4,15);
+  // request.checkBody('password1','password must be 8 to 100 charecters long').len(8,100);
+  // request.checkBody('password1','password must include one lowercase letter,one uppercase letter,a number and a special charecter').matches(("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"));
+  // request.checkBody('inputpassword1','password must include one lowercase letter,one uppercase letter,a number and a special charecter').matches(("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"));
+  // request.checkBody('inputpassword2','password does not match').equals(request.body.password);
+  // const errors = request.validationErrors();
 
-  if(errors){
-    console.log(errors);
-    response.render('signup',{title:"registration error",errors:errors});
-    }
+  // if(errors){
+  //   console.log(errors);
+  //   response.render('signup',{title:"registration error",errors:errors});
+  //   }
   var username = request.body.username;
   console.log(request.body);
   var hashedPassword = passwordHash.generate(request.body.password1);
@@ -81,10 +81,11 @@ router.post("/signup", function (request, response) {
 router.post("/", function (request, response) {
   var username = request.body.username;
   var password = request.body.password;
-  console.log(password);
-  var isSuccess = false;
+  
+  
   db.User.findOne({
-    userName: username
+    where:
+    {userName: username}
   }).then(function (userData) {
     console.log(userData['dataValues']);
     var hashedPassword = (userData['dataValues'].passWord);
@@ -96,7 +97,7 @@ router.post("/", function (request, response) {
       response.render("adminlanding");
     } else {
       console.log("password not match");
-     response.render("adminadd");
+     response.render("login");
     }
   });
   // if(isSuccess){
