@@ -16,8 +16,23 @@
 
       <div class="col-sm-2">
         <div class="row">
+          <div class="form-group">
+            <button type="button" class="selectDate btn btn-success">Search Schedule</button>
+            <br><br>
+
+            <input id="startselect" type="date">
+            {{!-- <input id="endselect" type="date"> --}}
+            <button type="button" class="selectDate btn btn-success">Search Schedule</button>
+          </div>
+          
+          <br><br>
+
+          <div id="userDate">
+          </div>
+          <br><br>
           <h2 id="shows"></h2>
         </div>
+        
         <div class="row">
           <ul class="list-group" id="current">
             {{#each movies}}
@@ -25,18 +40,6 @@
             {{/each}}
           </ul>
         </div><br>
-
-        {{!-- <div class="row">
-          <h2>Coming soon</h2>
-          </div>
-          <div class="row">
-          <ul class="list-group" id="comingsoon">
-            {{#each movies}}
-              <button class="list-group-item" data-value={{moviename}}>{{moviename}}</button>
-            {{/each}}
-          </ul>
-          </div> --}}
-
       </div>
 
       <div class="col-sm-1"></div>
@@ -63,75 +66,55 @@
     <div class="col-sm-4">
       <ul class="list-group" id="movieinfohere">
       </ul>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th id="scheduleTitle"></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td id="screenName">Screen 1</td>
+                <td></td>
+              </tr>
+              <tr>
+                  <td>
+                    <button id="showA" type="button" class="btn btn-secondary">9:00 AM</button> 
+                  </td>
+                  <td>
+                    <button id="showB" type="button" class="btn btn-secondary">2:00 PM</button>
+                  </td>
+                  <td>
+                    <button id="showC" type="button" class="btn btn-secondary">6:00 PM</button>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
     </div>
 
   </div>
 
 
-          <div class="form-group">
-            <label for="startselect">Select Dates:</label>
-            <input id="startselect" type="date">
-            {{!-- <input id="endselect" type="date"> --}}
-          </div>
 
+
+{{!-- 
+          <div class="btn-group" data-toggle="buttons">
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-              <button type="button" class="btn btn-info btn-lg " id="timeA" disabled="true">9:00AM</button>
-              {{!-- <input class="form-check-input" type="checkbox" id="timeA" value="timeA"> 9:00AM --}}
+              
             </label>
           </div>
-          <div class="form-check form-check-inline">
-            <label class="form-check-label">
-              <button type="button" class="btn btn-info btn-lg" id="timeB" disabled="true">12:00AM</button>
-              {{!-- <input class="form-check-input" type="checkbox" id="timeB" value="trueB"> 12:00PM --}}
-            </label>
-          </div>
-          <div class="form-check form-check-inline">
-            <label class="form-check-label">
-              <button type="button" class="btn btn-info bn-lg" id="timeC" disabled="true">6:00AM</button>
-              {{!-- <a href="#" class="btn btn-info btn-lg disabled" role="button" aria-disabled="true">6:00AM</a> --}}
-              {{!-- <input class="form-check-input" type="checkbox" id="timeC" value="trueC"> 6:00PM --}}
-            </label>
-          </div>
+        </div> --}}
 
           
           <div class="reservation">
             <button type="button" class="btn btn-primary btn-lg btn-block" id="remainingSeats">Remaining Seats (Click to reserve)</button>
             <button type="button" class="btn btn-secondary btn-lg btn-block" id="reservedSeats" disabled>Reserved Seats</button>
           </div>
-
-
-
-  {{!--           <h1>Screen 1</h1>
-          <div id="adminLandingScreen1">
-            <table>
-              <thead>
-                <tr>
-                  <th><h3>Start Date |</h3></th>
-                  <th><h3>End Date |</h3></th>
-                  <th><h3>Time</h3></th>
-                </tr>
-              </thead>
-              <tbody id="tableCurrent">
-              </tbody>
-            </table>
-          </div><br> --}}
-
-    {{!--           <h1>Screen 2</h1>
-          <div id="adminLandingScreen2">
-            <table>
-              <thead>
-                <tr>
-                  <th><h3>Start Date |</h3></th>
-                  <th><h3>End Date |</h3></th>
-                  <th><h3>Time</h3></th>
-                </tr>
-              </thead>
-              <tbody id="tableComingSoon">
-              </tbody>
-            </table>
-          </div> --}}
-
 
         </div>
       </div>
@@ -140,52 +123,65 @@
 
   <script>
 
+
+  $("#startselect").hide();
+  $(".reservation").hide();
   // $("#getinfobutton").on("click", function(event) {
   //   event.preventDefault();
-
   // })
     // var today = moment().format('YYYY-MM-DD');
-    var schedule = [
-    //first object is for testing purpose
-    {
-      title: "Thor",
-      date : moment().format('YYYY-MM-DD'),
-      showTime: "timeA"
-    }, {
-      title: "Moana",
-      date : "2017-11-06",
-      showTime: ["timeB", "timeC"]
-    }, {
-      title: "Max Payne",
-      date : "2017-11-07",
-      showTime: "timeC"
-    },
-   {
-        "date": "2017-11-15",
-        "Movie.id": 1,
-        "Movie.title": "frozen",
-        "Movie.releaseYear": 2013,
-        "Screen.id": 1,
-        "Screen.name": "screen-1",
-        "Screen.seats": 10,
-        "ShowTime.id": 1,
-        "ShowTime.name": "9.00 am"
-    },
-    {
-        "date": "2017-11-15",
-        "Movie.id": 1,
-        "Movie.title": "frozen",
-        "Movie.releaseYear": 2013,
-        "Screen.id": 2,
-        "Screen.name": "screen-2",
-        "Screen.seats": 15,
-        "ShowTime.id": 1,
-        "ShowTime.name": "9.00 am"
+
+  function search (searchKey, value, errorMessage) {
+    var searchKey;
+
+    if (searchKey === value) {
+      return value;
+    } else {
+      alert("Kindly enter correct input");
     }
-]
+  }
 
 
-
+  var schedule = [
+    {
+        "id": 1,
+        "title": "frozen",
+        "Shows": [
+            {
+                "id": 1,
+                "date": "2017-11-15",
+                "screenId": 1,
+                "showtimeId": 1,
+                "MovieId": 1
+            }, {
+                "id": 2,
+                "date": "2017-11-15",
+                "screenId": 2,
+                "showtimeId": 1,
+                "MovieId": 1
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "finding nemo",
+        "Shows": [
+            {
+                "id": 7,
+                "date": "2017-11-15",
+                "screenId": 1,
+                "showtimeId": 2,
+                "MovieId": 2
+            }, {
+                "id": 8,
+                "date": "2017-11-15",
+                "screenId": 2,
+                "showtimeId": 2,
+                "MovieId": 2
+            }
+        ]
+    }
+    ]
     // console.log(schedule[0].title);
 
 
@@ -193,31 +189,26 @@
   //   $("#startselect").datepicker();
   // });
 
-    // var current = ["Thor", "Moana", "lion king", "max payne", "star wars"];
+    // var date = $("#startselect").attr("value", "moment().format('YYYY-MM-DD')");
+    var date = moment().format('YYYY-MM-DD');
+    $("#userDate").append(date);
+
     var current = [];
+
     for (var i = 0; i < schedule.length; i++) {
       current.push(schedule[i].title);
     }
-      
+
     $("#shows").append("Today Shows")
     current.forEach(function(e) {
       var temp = $("<button>").attr("class", "list-group-item").attr("data-value", e).text(e);
       $("#current").append(temp);
     })
 
-
-
-    // var comingsoon = ["comingsoon1", "comingsoon2", "comingsoon3", "comingsoon4", "comingsoon5"];
-    // comingsoon.forEach(function(e) {
-    //   var temp = $("<button>").attr("class", "list-group-item").attr("data-value", e).text(e);
-    //   $("#comingsoon").append(temp);
-    // })
-    
-
     $(".list-group-item").on("click", function(event) {
       event.preventDefault();
       $("#tableCurrent").empty();
-      $("#tableComingSoon").empty();
+      // $("#tableComingSoon").empty();
       var title = $("<p>").html($(this).attr("data-value")).attr("class", "animated flash")
       $("#adminLandingScreenMovieTitle").html(title)
 
@@ -244,10 +235,30 @@
       // var actors = $("<li>").html("<h4>Actors: " + response.Actors + "</h4>");
       // var plot = $("<li>").html("<h4>Plot: " + response.Plot + "</h4>");
       $("#movieinfohere").append(movietitle,  genre);
+      $("#scheduleTitle").html(response.Title);
         // , release, actors, plot);
       // $("#movietoadd").text("Adding " + response.Title).attr("class", "animated flash");
       // $("#addbutton").show();
       })  
     })
+
+
+
+    $(".selectDate").on("click", function(event) {
+      $("#startselect").show();
+        
+        $("dateSubmit").on("click", function(click) {
+          var dateSelected = $("#startselect").val();
+          var dateSearch = schedule.Shows.date;
+
+          var errorMessage = "No movies on display on mentioned Date! \n Kindly check again"
+
+          search(dateSearch, dateSelected, errorMessage);
+
+          
+        })
+      
+    })
+
 
   </script>
