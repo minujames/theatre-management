@@ -1,0 +1,108 @@
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Theatre Management User Page</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item active"><a class="nav-link" href="#">Shows</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Reservations</a></li>
+      </ul>
+    </div>
+  </nav><br><br><br>
+
+  <div class="container">
+    <div class="row main-wrapper">
+      <div class="col-md-12">
+        <input id="date" required>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-3 pageSections">
+        <div class="row">
+          <div class="col-md-12" id="movieDiv">
+            <ul class="list-group shows">
+              {{#each movies}}
+              {{> movies/movie-block}}
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5 pageSections" id="summaryDiv">
+        <div class="row">
+          <div class="col-md-12">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 pageSections">
+        <div class="row">
+          <div class="col-md-12" id="reservationDiv">
+            <ul class="list-group shows">
+              {{#each reservations}}
+              {{> reservations/reservation-block}}
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+  $(document).ready(function() {
+    var currentDate = moment().format("MM-DD-YYYY");
+    $("#date").val(currentDate);
+    // getShows(currentDate);
+
+    $('#date').datepicker({
+      todayHighlight: true,
+      format: 'mm-dd-yyyy',
+      startDate: '0',
+      autoclose: true
+    }).on('changeDate', function(e) {
+      var dateSelected = $("#date").val().trim();
+      console.log(dateSelected);
+      // getShows(dateSelected);
+
+      
+    });
+
+    // minDate: new Date(2017, 11, ),
+    // dateFormat: "mm-dd-yy"
+
+    function getShows(date){
+      var dateFormatted = moment(date, "MM-DD-YYYY").format("YYYY-MM-DD");
+
+      // $.get( "/theatre/api/show/" + dateFormatted);
+      $.get( "/theatre/api/show/?date =" + dateFormatted , function(data) {
+        console.log( data );
+      });
+    }  
+
+    $("li.movie").on("click", function(event){
+      // var id = $(this).data("id");
+      // var title = $(this).data("title");
+      // console.log(id, title);
+      
+      // $.ajax({
+      //   url: "https://www.omdbapi.com/?t=" + title + "&y=&plot&apikey=40e9cece",
+      //   method: "GET"
+      // }).done(function(response) {
+      //   var div = $("<div>");
+      //   var img = $("<img id='poster'>").attr("src", response.Poster);
+      //   div.append(img);
+      //   $("#summaryDiv").append(div);
+      // });
+
+      $.get( "/adminlanding" , function(data) {
+      });
+
+    });
+  });
+
+  </script

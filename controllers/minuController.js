@@ -183,6 +183,7 @@ router.get("/api/show/:screenId/:startDate/:endDate", function(request, response
 // Gets all shows on a particular date (optional)
 // [GET: http://localhost:3000/theatre/api/show/2017-11-15]
 router.get("/api/show/:date", function(request, response) {
+  console.log(".....", request.params.date);
   db.Show.findAll({
     where: {
       date : request.params.date
