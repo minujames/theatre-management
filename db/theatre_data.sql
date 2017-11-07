@@ -10,7 +10,8 @@ INSERT INTO theatre_db.Movies (title, releaseYear) VALUES ("finding nemo", "2003
 
 INSERT INTO theatre_db.Users (name, userName, passWord, role) VALUES ("admin", "admin", "admin", "admin");
 INSERT INTO theatre_db.Users (name, userName, passWord, role) VALUES ("john doe", "john", "password", "user");
-
+INSERT INTO theatre_db.Users (name, userName, passWord, role) VALUES ("minu", "minu", "pass", "user");
+INSERT INTO theatre_db.Users (name, userName, passWord, role) VALUES ("minu", "minu", "pass", "user");
 
 INSERT INTO theatre_db.shows (date, movieId, screenId, ShowTimeId) 
   VALUES ("2017-11-15", 1, 1, 1);
