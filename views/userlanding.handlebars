@@ -34,6 +34,7 @@
             <input id="startselect" type="date">
             {{!-- <input id="endselect" type="date"> --}}
             <button type="button" class="submitDate btn btn-success">Submit</button>
+            <button type="button" class="selectDate btn btn-success">Search Schedule</button>
           </div>
           
           <br><br>
@@ -89,11 +90,16 @@
             <tbody>
               <tr>
                 <td></td>
+<<<<<<< HEAD
                 <td id="screenName1"></td>
+=======
+                <td id="screenName">Screen 1</td>
+>>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
                 <td></td>
               </tr>
               <tr>
                   <td>
+<<<<<<< HEAD
                     <button id="show1A" type="button" class="btn btn-secondary">9:00 AM</button> 
                   </td>
                   <td>
@@ -115,6 +121,15 @@
                   </td>
                   <td>
                     <button id="show2C" type="button" class="btn btn-secondary">6:00 PM</button>
+=======
+                    <button id="showA" type="button" class="btn btn-secondary">9:00 AM</button> 
+                  </td>
+                  <td>
+                    <button id="showB" type="button" class="btn btn-secondary">2:00 PM</button>
+                  </td>
+                  <td>
+                    <button id="showC" type="button" class="btn btn-secondary">6:00 PM</button>
+>>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
                   </td>
               </tr>
             </tbody>
@@ -141,7 +156,10 @@
             <button type="button" class="btn btn-secondary btn-lg btn-block" id="reservedSeats" disabled>Reserved Seats</button>
           </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
         </div>
       </div>
     </div>
@@ -152,6 +170,7 @@
 
   $("#startselect").hide();
   $(".reservation").hide();
+<<<<<<< HEAD
   $(".submitDate").hide();
   // $("#screenName1").hide();
   // $("#screenName2").hide();
@@ -165,6 +184,8 @@
   // $("#showTable1").hide();
   // $("#showTable2").hide();
   $("#screenName2").hide();
+=======
+>>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
   // $("#getinfobutton").on("click", function(event) {
   //   event.preventDefault();
   // })
@@ -177,6 +198,7 @@
       return value;
     } else {
       alert("Kindly enter correct input");
+<<<<<<< HEAD
     }
   }
 
@@ -256,6 +278,52 @@
       }
     }
 
+=======
+    }
+  }
+
+
+  var schedule = [
+    {
+        "id": 1,
+        "title": "frozen",
+        "Shows": [
+            {
+                "id": 1,
+                "date": "2017-11-15",
+                "screenId": 1,
+                "showtimeId": 1,
+                "MovieId": 1
+            }, {
+                "id": 2,
+                "date": "2017-11-15",
+                "screenId": 2,
+                "showtimeId": 1,
+                "MovieId": 1
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "finding nemo",
+        "Shows": [
+            {
+                "id": 7,
+                "date": "2017-11-15",
+                "screenId": 1,
+                "showtimeId": 2,
+                "MovieId": 2
+            }, {
+                "id": 8,
+                "date": "2017-11-15",
+                "screenId": 2,
+                "showtimeId": 2,
+                "MovieId": 2
+            }
+        ]
+    }
+    ]
+>>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
     // console.log(schedule[0].title);
     // console.log(schedule[0].Shows[0].date);
 
@@ -265,6 +333,7 @@
     $("#current").empty();
     $("#userDate").html(date);
 
+<<<<<<< HEAD
     var current = [];
     // var movieId = [];
 
@@ -285,12 +354,28 @@
     }
 
     $("#shows").html("Today Shows")
+=======
+    // var date = $("#startselect").attr("value", "moment().format('YYYY-MM-DD')");
+    var date = moment().format('YYYY-MM-DD');
+    $("#userDate").append(date);
+
+    var current = [];
+
+    for (var i = 0; i < schedule.length; i++) {
+      current.push(schedule[i].title);
+    }
+
+    $("#shows").append("Today Shows")
+>>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
     current.forEach(function(e) {
       var temp = $("<button>").attr("class", "list-group-item").attr("data-value", e).text(e);
       $("#current").append(temp);
     })
+<<<<<<< HEAD
   
   // displayShows(date);
+=======
+>>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
 
     $(".list-group-item").on("click", function(event) {
       event.preventDefault();
@@ -331,6 +416,7 @@
 
 
 
+<<<<<<< HEAD
     // $(".selectDate").on("click", function(event) {
     //   $("#startselect").show();
     //   $(".submitDate").show();
@@ -359,3 +445,23 @@
 
 
   </script>
+=======
+    $(".selectDate").on("click", function(event) {
+      $("#startselect").show();
+        
+        $("dateSubmit").on("click", function(click) {
+          var dateSelected = $("#startselect").val();
+          var dateSearch = schedule.Shows.date;
+
+          var errorMessage = "No movies on display on mentioned Date! \n Kindly check again"
+
+          search(dateSearch, dateSelected, errorMessage);
+
+          
+        })
+      
+    })
+
+
+  </script>
+>>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
