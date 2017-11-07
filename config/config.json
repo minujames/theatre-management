@@ -1,11 +1,7 @@
 {
   "development": {
     "username": "root",
-<<<<<<< HEAD
-    "password": "pass",
-=======
     "password": "1234",
->>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
     "database": "theatre_db",
     "host": "127.0.0.1",
     "dialect": "mysql"

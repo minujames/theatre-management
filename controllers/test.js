@@ -17,7 +17,7 @@ router.get("/authenticate", function(request, response) {
 });
 
 router.get("/adminlanding", function(request, response) {
-  response.render("adminlanding");
+  response.render("adminlanding", {currentmovies: "#", comingsoonmovies: "#"});
 });
 
 router.get("/userlanding", function(request, response) {
