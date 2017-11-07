@@ -90,16 +90,16 @@
             <tbody>
               <tr>
                 <td></td>
-<<<<<<< HEAD
+
                 <td id="screenName1"></td>
-=======
+
                 <td id="screenName">Screen 1</td>
->>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
+
                 <td></td>
               </tr>
               <tr>
                   <td>
-<<<<<<< HEAD
+
                     <button id="show1A" type="button" class="btn btn-secondary">9:00 AM</button> 
                   </td>
                   <td>
@@ -121,7 +121,7 @@
                   </td>
                   <td>
                     <button id="show2C" type="button" class="btn btn-secondary">6:00 PM</button>
-=======
+
                     <button id="showA" type="button" class="btn btn-secondary">9:00 AM</button> 
                   </td>
                   <td>
@@ -129,7 +129,7 @@
                   </td>
                   <td>
                     <button id="showC" type="button" class="btn btn-secondary">6:00 PM</button>
->>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
+
                   </td>
               </tr>
             </tbody>
@@ -156,21 +156,19 @@
             <button type="button" class="btn btn-secondary btn-lg btn-block" id="reservedSeats" disabled>Reserved Seats</button>
           </div>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
         </div>
       </div>
     </div>
   </div>
 
+   <script src="assets/js/users.js"></script>
   <script>
+
 
 
   $("#startselect").hide();
   $(".reservation").hide();
-<<<<<<< HEAD
+
   $(".submitDate").hide();
   // $("#screenName1").hide();
   // $("#screenName2").hide();
@@ -184,8 +182,7 @@
   // $("#showTable1").hide();
   // $("#showTable2").hide();
   $("#screenName2").hide();
-=======
->>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
+
   // $("#getinfobutton").on("click", function(event) {
   //   event.preventDefault();
   // })
@@ -198,7 +195,6 @@
       return value;
     } else {
       alert("Kindly enter correct input");
-<<<<<<< HEAD
     }
   }
 
@@ -278,7 +274,7 @@
       }
     }
 
-=======
+
     }
   }
 
@@ -323,7 +319,7 @@
         ]
     }
     ]
->>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
+
     // console.log(schedule[0].title);
     // console.log(schedule[0].Shows[0].date);
 
@@ -333,7 +329,7 @@
     $("#current").empty();
     $("#userDate").html(date);
 
-<<<<<<< HEAD
+
     var current = [];
     // var movieId = [];
 
@@ -354,7 +350,7 @@
     }
 
     $("#shows").html("Today Shows")
-=======
+
     // var date = $("#startselect").attr("value", "moment().format('YYYY-MM-DD')");
     var date = moment().format('YYYY-MM-DD');
     $("#userDate").append(date);
@@ -366,16 +362,11 @@
     }
 
     $("#shows").append("Today Shows")
->>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
+
     current.forEach(function(e) {
       var temp = $("<button>").attr("class", "list-group-item").attr("data-value", e).text(e);
       $("#current").append(temp);
     })
-<<<<<<< HEAD
-  
-  // displayShows(date);
-=======
->>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
 
     $(".list-group-item").on("click", function(event) {
       event.preventDefault();
@@ -416,7 +407,6 @@
 
 
 
-<<<<<<< HEAD
     // $(".selectDate").on("click", function(event) {
     //   $("#startselect").show();
     //   $(".submitDate").show();
@@ -441,27 +431,22 @@
     // }
 
 
-
-
-
-  </script>
-=======
-    $(".selectDate").on("click", function(event) {
-      $("#startselect").show();
+    // $(".selectDate").on("click", function(event) {
+    //   $("#startselect").show();
         
-        $("dateSubmit").on("click", function(click) {
-          var dateSelected = $("#startselect").val();
-          var dateSearch = schedule.Shows.date;
+    //     $("dateSubmit").on("click", function(click) {
+    //       var dateSelected = $("#startselect").val();
+    //       var dateSearch = schedule.Shows.date;
 
-          var errorMessage = "No movies on display on mentioned Date! \n Kindly check again"
+    //       var errorMessage = "No movies on display on mentioned Date! \n Kindly check again"
 
-          search(dateSearch, dateSelected, errorMessage);
+    //       search(dateSearch, dateSelected, errorMessage);
 
           
-        })
+    //     })
       
-    })
+    // })
 
 
   </script>
->>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
+

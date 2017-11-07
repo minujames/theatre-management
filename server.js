@@ -8,7 +8,12 @@ var movieRoutes = require("./controllers/moviesController.js");
 var schedulesRoutes = require("./controllers/schedulesController.js");
 var usersRoutes = require("./controllers/usersController.js");
 var minuRoutes = require("./controllers/minuController.js");
+<<<<<<< HEAD
 var fasRoutes = require("./controllers/fasController.js")
+=======
+var testRoutes = require("./controllers/test.js");
+
+>>>>>>> 3119a621c4016906c41ba68d3ca21c69fa5f3d3a
 
 // Declaring port
 var port = process.env.PORT || 8080;
@@ -42,12 +47,7 @@ app.set("view engine", "handlebars");
 // app.enable('view cache');
 
 // Setting the root path
-<<<<<<< HEAD
-app.use("/movie", movieRoutes);
-app.use("/schedules", schedulesRoutes);
-app.use("/users", usersRoutes);
-app.use("/minu", minuRoutes);
-=======
+
 app.use("/", movieRoutes);
 app.use("/", schedulesRoutes);
 app.use("/", usersRoutes);
@@ -56,7 +56,8 @@ app.use("/", usersRoutes);
 app.use("/", fasRoutes);
 
 app.use("/theatre", minuRoutes);
->>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
+app.use("/", testRoutes);
+
 
 
 // Listening on declared port
