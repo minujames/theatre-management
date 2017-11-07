@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var expressHandleBars = require("express-handlebars");
 var session = require("express-session");
 var expressValidator = require("express-validator");
+
 var movieRoutes = require("./controllers/moviesController.js");
 var schedulesRoutes = require("./controllers/schedulesController.js");
 var usersRoutes = require("./controllers/usersController.js");
