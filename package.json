@@ -20,8 +20,12 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
+<<<<<<< HEAD
     "express-session": "^1.15.6",
     "express-validator": "^4.3.0",
+=======
+    "moment": "^2.19.1",
+>>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
     "mysql2": "^1.4.2",
     "nodemon": "^1.12.1",
     "passport": "^0.4.0",

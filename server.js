@@ -41,10 +41,17 @@ app.set("view engine", "handlebars");
 // app.enable('view cache');
 
 // Setting the root path
+<<<<<<< HEAD
 app.use("/movie", movieRoutes);
 app.use("/schedules", schedulesRoutes);
 app.use("/users", usersRoutes);
 app.use("/minu", minuRoutes);
+=======
+app.use("/", movieRoutes);
+app.use("/", schedulesRoutes);
+app.use("/", usersRoutes);
+app.use("/theatre", minuRoutes);
+>>>>>>> 93bdba9a9130d91563320eb866b13a42b8a4605f
 
 // Listening on declared port
 db.sequelize.sync({ force: false }).then(function() {

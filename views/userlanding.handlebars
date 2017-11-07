@@ -1,0 +1,264 @@
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Theatre Management Admin Page</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Add a Movie</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">View Schedule</a></li>
+      </ul>
+    </div>
+  </nav><br><br><br>
+
+  <h5>      This is the User Landing Page</h5>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-1"></div>
+
+      <div class="col-sm-2">
+        <div class="row">
+          <div class="form-group">
+            <button type="button" class="selectDate btn btn-success">Search Schedule</button>
+            <br><br>
+
+            <input id="startselect" type="date">
+            {{!-- <input id="endselect" type="date"> --}}
+            <button type="button" class="selectDate btn btn-success">Search Schedule</button>
+          </div>
+          
+          <br><br>
+
+          <div id="userDate">
+          </div>
+          <br><br>
+          <h2 id="shows"></h2>
+        </div>
+        
+        <div class="row">
+          <ul class="list-group" id="current">
+            {{#each movies}}
+              <button class="list-group-item" data-value={{moviename}}>{{moviename}}</button>
+            {{/each}}
+          </ul>
+        </div><br>
+      </div>
+
+      <div class="col-sm-1"></div>
+
+      <div class="col-sm-7">
+        <div id="adminLandingShowScreen">
+          <div class="row">
+            <h1 id="adminLandingScreenMovieTitle"></h1>
+          </div><br>
+
+        <div class="col-sm-2">
+          <img src="#" id="movieposterhere" height="120">
+        </div>
+
+        <div class="col-sm-1"></div>
+          <div class="col-sm-6">
+        <div id="addmoviesection">
+          <h1 id="movietoadd"></h1>
+        </div>
+      </div>
+        <div class="row">
+    <div class="col-sm-1"></div>
+
+    <div class="col-sm-4">
+      <ul class="list-group" id="movieinfohere">
+      </ul>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th id="scheduleTitle"></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td id="screenName">Screen 1</td>
+                <td></td>
+              </tr>
+              <tr>
+                  <td>
+                    <button id="showA" type="button" class="btn btn-secondary">9:00 AM</button> 
+                  </td>
+                  <td>
+                    <button id="showB" type="button" class="btn btn-secondary">2:00 PM</button>
+                  </td>
+                  <td>
+                    <button id="showC" type="button" class="btn btn-secondary">6:00 PM</button>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+  </div>
+
+
+
+
+{{!-- 
+          <div class="btn-group" data-toggle="buttons">
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              
+            </label>
+          </div>
+        </div> --}}
+
+          
+          <div class="reservation">
+            <button type="button" class="btn btn-primary btn-lg btn-block" id="remainingSeats">Remaining Seats (Click to reserve)</button>
+            <button type="button" class="btn btn-secondary btn-lg btn-block" id="reservedSeats" disabled>Reserved Seats</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+
+  $("#startselect").hide();
+  $(".reservation").hide();
+  // $("#getinfobutton").on("click", function(event) {
+  //   event.preventDefault();
+  // })
+    // var today = moment().format('YYYY-MM-DD');
+
+  function search (searchKey, value, errorMessage) {
+    var searchKey;
+
+    if (searchKey === value) {
+      return value;
+    } else {
+      alert("Kindly enter correct input");
+    }
+  }
+
+
+  var schedule = [
+    {
+        "id": 1,
+        "title": "frozen",
+        "Shows": [
+            {
+                "id": 1,
+                "date": "2017-11-15",
+                "screenId": 1,
+                "showtimeId": 1,
+                "MovieId": 1
+            }, {
+                "id": 2,
+                "date": "2017-11-15",
+                "screenId": 2,
+                "showtimeId": 1,
+                "MovieId": 1
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "finding nemo",
+        "Shows": [
+            {
+                "id": 7,
+                "date": "2017-11-15",
+                "screenId": 1,
+                "showtimeId": 2,
+                "MovieId": 2
+            }, {
+                "id": 8,
+                "date": "2017-11-15",
+                "screenId": 2,
+                "showtimeId": 2,
+                "MovieId": 2
+            }
+        ]
+    }
+    ]
+    // console.log(schedule[0].title);
+
+
+  // $(document).ready(function() {
+  //   $("#startselect").datepicker();
+  // });
+
+    // var date = $("#startselect").attr("value", "moment().format('YYYY-MM-DD')");
+    var date = moment().format('YYYY-MM-DD');
+    $("#userDate").append(date);
+
+    var current = [];
+
+    for (var i = 0; i < schedule.length; i++) {
+      current.push(schedule[i].title);
+    }
+
+    $("#shows").append("Today Shows")
+    current.forEach(function(e) {
+      var temp = $("<button>").attr("class", "list-group-item").attr("data-value", e).text(e);
+      $("#current").append(temp);
+    })
+
+    $(".list-group-item").on("click", function(event) {
+      event.preventDefault();
+      $("#tableCurrent").empty();
+      // $("#tableComingSoon").empty();
+      var title = $("<p>").html($(this).attr("data-value")).attr("class", "animated flash")
+      $("#adminLandingScreenMovieTitle").html(title)
+
+      var name = $(this).attr("data-value")
+
+      // var title = $("<p>").html("Click a Movie Title!").attr("class", "animated flash")
+      // $("#adminLandingScreenMovieTitle").html(title)
+
+    $("#movieinfohere").empty();
+    // var movie = $("#movietitle").val().trim();
+    // $("#movietitle").val("")
+
+      console.log(name);
+      console.log($(this).attr("data-value"));        
+      $.ajax({
+      url: "https://www.omdbapi.com/?t=" + name + "&y=&plot&apikey=40e9cece",
+      method: "GET"
+    }).done(function(response) {
+      $("#movieposterhere").attr("src", response.Poster);
+      var movietitle = $("<li>").html("<h4>Title: " + response.Title + "</h4>");
+      console.log("I am running");
+      // var release = $("<li>").html("<h4>Release Date: " + response.Released + ", Rating: " + response.Rated + "</h4>");
+      var genre = $("<li>").html("<h4>Genre: " + response.Genre);
+      // var actors = $("<li>").html("<h4>Actors: " + response.Actors + "</h4>");
+      // var plot = $("<li>").html("<h4>Plot: " + response.Plot + "</h4>");
+      $("#movieinfohere").append(movietitle,  genre);
+      $("#scheduleTitle").html(response.Title);
+        // , release, actors, plot);
+      // $("#movietoadd").text("Adding " + response.Title).attr("class", "animated flash");
+      // $("#addbutton").show();
+      })  
+    })
+
+
+
+    $(".selectDate").on("click", function(event) {
+      $("#startselect").show();
+        
+        $("dateSubmit").on("click", function(click) {
+          var dateSelected = $("#startselect").val();
+          var dateSearch = schedule.Shows.date;
+
+          var errorMessage = "No movies on display on mentioned Date! \n Kindly check again"
+
+          search(dateSearch, dateSelected, errorMessage);
+
+          
+        })
+      
+    })
+
+
+  </script>
