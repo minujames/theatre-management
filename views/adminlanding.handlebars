@@ -18,9 +18,9 @@
         </div>
         <div class="row">
           <ul class="list-group" id="current">
-            {{#each currentmovies}}
+{{!--             {{#each currentmovies}}
               <button class="list-group-item" data-value={{title}}>{{title}}</button>
-            {{/each}}
+            {{/each}} --}}
           </ul>
         </div><br>
 
@@ -29,9 +29,9 @@
         </div>
         <div class="row">
           <ul class="list-group" id="comingsoon">
-            {{#each comingsoonmovies}}
+{{!--             {{#each comingsoonmovies}}
               <button class="list-group-item" data-value={{title}}>{{title}}</button>
-            {{/each}}
+            {{/each}} --}}
           </ul>
         </div>
       </div>
@@ -83,7 +83,7 @@
     $.get("theatre/api/movie/running", function(data) {
       current = data;
       current.forEach(function(e) {
-        var temp = $("<button>").attr("class", "list-group-item").attr("data-value", e.title).attr("data-id", e.id).text(e.title);
+        var temp = $("<button>").attr("class", "list-group-item text-left").attr("data-value", e.title).attr("data-id", e.id).html("<h5>" + e.title + "</h5>");
         $("#current").append(temp);
       })
     })
@@ -91,7 +91,7 @@
     $.get("theatre/api/movie/comingsoon", function(data) {
       comingsoon = data;
       comingsoon.forEach(function(e) {
-        var temp = $("<button>").attr("class", "list-group-item").attr("data-value", e.title).attr("data-id", e.id).text(e.title);
+        var temp = $("<button>").attr("class", "list-group-item text-left").attr("data-value", e.title).attr("data-id", e.id).html("<h5>" + e.title + " / " + e["Shows.minDate"] + "</h5>");
         $("#comingsoon").append(temp);
       })
     })
@@ -103,12 +103,14 @@
       $(".list-group-item").on("click", function(event) {
         event.preventDefault();
         console.log("click")
+        var temp = $(this).attr("data-value")
         $.get("/theatre/api/show/movie/" + $(this).attr("data-id"), function(data) {
           console.log(data);
           var schedule = data;
           $("#tableScreen1").empty();
           $("#tableScreen2").empty();
-          var title = $("<p>").html($(this).attr("data-value")).attr("class", "animated flash")
+          console.log(temp)
+          var title = $("<p>").html("Schedule for: " + temp).attr("class", "animated flash")
           $("#adminLandingScreenMovieTitle").html(title)
           schedule.forEach(function(e) {
             var newrow = $("<tr>")
@@ -127,5 +129,5 @@
 
     var title = $("<p>").html("Click a Movie Title!").attr("class", "animated flash")
     $("#adminLandingScreenMovieTitle").html(title)
-    setTimeout(enable, 500);
+    setTimeout(enable, 200);
   </script>
