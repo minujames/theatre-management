@@ -1,4 +1,3 @@
-
 var express = require("express");
 var router = express.Router();
 var passwordHash = require('password-hash');
@@ -8,18 +7,28 @@ var db = require("../models");
 //route for the root
 router.get("/", function (request, response) {
   response.render("login");
+  console.log("req session is ", request.session);
 });
 
-router.get("/adminlanding",function(request,response){
+router.get("/adminlanding", function (request, response) {
   response.render("adminlanding");
+
 })
 
 
 //route for signup
 router.get("/signup", function (request, response) {
   console.log("inside the signup route");
-  response.render("signup", { title: 'signup' });
+  response.render("signup", {
+    title: 'signup'
+  });
 });
+
+router.get("/userlanding", function (request, response) {
+  response.render("userlanding");
+})
+
+router.get("/")
 
 router.post("/signup", function (request, response) {
   console.log(request.body);
@@ -36,20 +45,21 @@ router.post("/signup", function (request, response) {
   //   console.log(errors);
   //   response.render('signup',{title:"registration error",errors:errors});
   //   }
+  var name = request.body.name;
   var username = request.body.username;
   console.log(request.body);
   var hashedPassword = passwordHash.generate(request.body.password1);
   console.log(hashedPassword);
   db.User.create({
-    name: "user1",
+    name: name,
     userName: username,
     passWord: hashedPassword,
-    role: "user"
+    role: "admin"
   }).then(function (tableData) {
     console.log(tableData);
     response.render("signupsuccessful");
   });
-  
+
 
 });
 
@@ -81,23 +91,37 @@ router.post("/signup", function (request, response) {
 router.post("/", function (request, response) {
   var username = request.body.username;
   var password = request.body.password;
-  
-  
   db.User.findOne({
-    where:
-    {userName: username}
+    where: {
+      userName: username
+    }
   }).then(function (userData) {
     console.log(userData['dataValues']);
     var hashedPassword = (userData['dataValues'].passWord);
-    console.log("the hashed password is "+hashedPassword);
+    var role = (userData['dataValues'].role);
+    console.log("the hashed password is " + hashedPassword);
     console.log(passwordHash.verify(password, hashedPassword));
-    if (passwordHash.verify(password, hashedPassword)) {
-      isSuccess = true;
-      console.log("password match");
-      response.render("adminlanding");
+    if (passwordHash.verify(password, hashedPassword) && role === 'user') {
+      console.log("password  is a match");
+      console.log("logged in as a user");
+      request.session.username = username;
+      request.session.role = role;
+      console.log(request.session);
+      response.redirect("users/userlanding");
+      console.log("req session is ", request.session);
+    }
+    if (passwordHash.verify(password, hashedPassword) && role === 'admin') {
+      console.log("password  is a match");
+      console.log("logged in as an administrator")
+      request.session.username = username;
+      request.session.role = role;
+      console.log(request.session);
+      response.redirect("users/userlanding");
+      console.log("req session is ", request.session);
     } else {
       console.log("password not match");
-     response.render("login");
+      response.redirect("/users");
+
     }
   });
   // if(isSuccess){
