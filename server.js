@@ -8,8 +8,12 @@ var movieRoutes = require("./controllers/moviesController.js");
 var schedulesRoutes = require("./controllers/schedulesController.js");
 var usersRoutes = require("./controllers/usersController.js");
 var minuRoutes = require("./controllers/minuController.js");
+<<<<<<< HEAD
+var fasRoutes = require("./controllers/fasController.js")
+=======
 var testRoutes = require("./controllers/test.js");
 
+>>>>>>> 3119a621c4016906c41ba68d3ca21c69fa5f3d3a
 
 // Declaring port
 var port = process.env.PORT || 8080;
@@ -55,10 +59,15 @@ app.use("/minu", minuRoutes);
 app.use("/", movieRoutes);
 app.use("/", schedulesRoutes);
 app.use("/", usersRoutes);
+
+// app.use("/minu", minuRoutes);
+app.use("/", fasRoutes);
+
 app.use("/theatre", minuRoutes);
 app.use("/", testRoutes);
 
 >>>>>>> master
+
 
 // Listening on declared port
 db.sequelize.sync({ force: false }).then(function() {
