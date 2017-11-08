@@ -211,7 +211,8 @@ router.get("/api/show/:date/:movieId", function(request, response) {
   console.log(request.params.date, request.params.movieId);
 
   db.Show.findAll({
-    attributes: ["date"],
+    attributes: ["date","id"],
+    group: ["id"],
     where: {
       date: request.params.date,
       MovieId: request.params.movieId
@@ -231,7 +232,7 @@ router.post("/api/reservation", function(request, response){
   // {
   //   "UserId": "3",
   //   "ShowId": "16",
-  //   "seats": "5"
+  //   "seatsReserved": "5"
   // }
   console.log(request.body);
   db.Reservation.create(request.body).then(function(result) {
@@ -261,7 +262,7 @@ router.get("/api/reservation/:userId", function(request, response){
 // [GET: http://localhost:3000/theatre/api/reservation/seats/remaining/16]
 router.get("/api/reservation/seats/remaining/:showId", function(request, response){
   db.Reservation.findAll({
-    attributes: [[db.Sequelize.fn('SUM', db.Sequelize.col('seats')), "seatsReserved"]],
+    attributes: [[db.Sequelize.fn('SUM', db.Sequelize.col('seatsReserved')), "seatsReserved"]],
     group: ["ShowId"],
     where: {
       ShowId: request.params.showId
@@ -280,6 +281,47 @@ router.get("/api/reservation/seats/remaining/:showId", function(request, respons
       var totalSeats = parseInt(result.dataValues.seats);
       response.json({remainingSeats: totalSeats - reservedSeats});
     });
+  });
+});
+
+
+// [User reservation]
+// Get remaining seats for a list of shows
+// [GET: http://localhost:3000/theatre/api/reservation/seats/remaining?showIds=16,17]
+router.get("/api/reservation/seats/remaining", function(request, response){
+  var showIds = (request.query.showIds).split(",");
+  console.log(showIds);
+
+  db.Reservation.findAll({
+    attributes: [[db.Sequelize.fn('SUM', db.Sequelize.col('seatsReserved')), "seatsReserved"]],
+    group: ["ShowId"],
+    where: {
+      ShowId: {
+        [db.Sequelize.Op.in] : showIds
+      }
+    },
+    include: [{
+      model: db.Show,
+      include: [db.Screen]
+    }]
+  }).then(function(result){
+
+    var resultArray = [];
+
+    result.forEach(function(show){
+      var showObj = {
+        availableSeats: parseInt(show.dataValues.Show.Screen.seats) - parseInt(show.dataValues.seatsReserved),
+        seatsReserved : show.dataValues.seatsReserved,
+        showId: show.dataValues.Show.id,
+        screenName: show.dataValues.Show.Screen.name,
+        screenId: show.dataValues.Show.Screen.id,
+        totalSeats: show.dataValues.Show.Screen.seats,
+        date: show.dataValues.Show.date,
+        movieId: show.dataValues.Show.MovieId
+      } 
+      resultArray.push(showObj);
+    })
+    response.json(resultArray);
   });
 });
 

@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    seats: {
+    seatsReserved: {
       type: DataTypes.INTEGER,
       allowNull: false
     }

@@ -4,22 +4,62 @@
 
 .main-wrapper{
   width: 85vw;
+  text-align: center;
 }
 
 #poster{
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
 }
 
 .pageSections{
   width: 100%;
+  text-align: center;
 }
 
 #cinema{
-  width: 400px;
+  width: 450px;
   height: 400px;
 }
 
 .space{
   margin-left: 15px;
 }
+
+.viewSchedule{
+  margin-top: 10px;
+}
+
+.main-section{
+  margin-top: 15px;
+}
+
+#summaryDiv{
+  margin-top: 10px;
+}
+
+.section-heading{
+  background-color: #2e3339;
+  color: white;
+  font-family: 'Oswald', sans-serif;
+}
+
+#date{
+  font-size: 20px;
+}
+
+.title{
+  margin-top: 10px;
+}
+
+.btnUserPage{
+  background-color: #2e3339;
+  color: white;
+  font-size: 20px;
+  font-family: 'Oswald', sans-serif;
+}
+
+.houseFull{
+  color: red;
+}
+
