@@ -153,7 +153,6 @@
         url: "https://www.omdbapi.com/?t=" + movie + "&y=&plot&apikey=40e9cece",
         method: "GET"
       }).done(function(response) {
-        console.log(response)
         $("#movieposterhere").attr("src", response.Poster);
         var title = $("<li>").html("<h4>Title: " + response.Title + "</h4>");
         var runtime = $("<li>").html("<h4>Runtime: " + response.Runtime + "</h4>");
@@ -166,7 +165,6 @@
         globalTitle = response.Title;
         globalreleaseYear = response.Year;
         var added = false;
-        //check if movie is in db. if it is, change added to true, and store movieid in globalMovieId
         $.get("theatre/api/movie/exists/" + (response.Title).toLowerCase(), function(data) {
           if (data.length > 0) {
             added = true
@@ -187,7 +185,6 @@
     $("#addbutton").on("click", function(event) {
       event.preventDefault();
       $.post("/theatre/api/movie/", {title: globalTitle.toLowerCase(), releaseYear: globalreleaseYear}, function(data) {
-        console.log(data)
       $("#addbutton").hide();
       $("#schedulebutton").show();
       })
@@ -196,7 +193,6 @@
     $("#schedulebutton").on("click", function(event) {
       event.preventDefault();
       $("#addmoviesection").show();
-      //get request search by movie title and get movieid
       $.get("/theatre/api/movie/exists/" + globalTitle, function(data) {
         globalMovieId = data[0].MovieId;
       })
@@ -207,12 +203,8 @@
       var screen = $("#screenselect").val();
       var start = $("#startselect").val();
       var end = $("#endselect").val();
-      console.log(screen, start, end);
       var url = "/theatre/api/show/" + screen + "/" + start + "/" + end
-      //ex. api/show/1/2017-11-14/2017-11-16
-      //get req to url. store result in global var called globalData
       $.get(url, function(data) {
-        console.log(data);
       createTable(screen, start, end, data);
       })
       $("#scheduletable").show();
@@ -221,7 +213,6 @@
     function enable() {
       $(".sche").unbind("click").on("click", function(event) {
         event.preventDefault();
-        console.log("click")
         if($(this).hasClass("btn-default")) {
           $(this).removeClass("btn-default");
           $(this).addClass("btn-danger");
@@ -242,8 +233,8 @@
         $.get("theatre/api/movie/exists/" + globalTitle, function(data) {
           var tempobj = {MovieId: data[0].id, date: tempdate, showtimeId: temptime, screenId: tempscreen};
           $.post("/theatre/api/show", tempobj);
-          location.reload();
         })
+          setTimeout(function() {location.reload()}, 200);
       })
     })
 
