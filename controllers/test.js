@@ -5,18 +5,25 @@ var router = express.Router();
 var db = require("../models");
 var moment = require("moment");
 
-router.get("/login", function(request, response) {
-  response.render("login");
-});
+// router.get("/login", function(request, response) {
+//   response.render("login");
+// });
 
-router.get("/authenticate", function(request, response) {
+// router.get("/authenticate", function(request, response) {
 
-  response.redirect("/adminlanding");
-});
+//   response.redirect("/adminlanding");
+// });
 
 router.get("/adminlanding", function(request, response) {
-  response.render("adminlanding", {currentmovies: "#", comingsoonmovies: "#"});
-});
+  if(request.session.username){
+    console.log(request.session.username);
+    response.render("adminlanding",{username:request.session.username,currentmovies: "#", comingsoonmovies: "#"});
+    }else{
+      response.redirect("/");
+    }
+    //response.render("adminlanding", {currentmovies: "#", comingsoonmovies: "#"});
+  });
+
 
 router.get("/userlanding", function(request, response) {
 
@@ -50,11 +57,11 @@ router.get("/userlanding", function(request, response) {
     }).then(function(result) {
 
       var reservations = result;
-
       response.render("userlanding_new", {
         movies: movies, 
         reservations: reservations,
-        date: date
+        date: date,
+        username:request.session.username
       });
     });
   });  

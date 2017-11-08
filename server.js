@@ -2,7 +2,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var expressHandleBars = require("express-handlebars");
-var session = require("express-session");
+var session = require('client-sessions');
 var expressValidator = require("express-validator");
 
 var movieRoutes = require("./controllers/moviesController.js");
@@ -31,11 +31,9 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(session({ 
   secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-     secure: true
-     }
+  cookieName: 'session',   
+	duration: 30 * 60 * 1000,    
+	activeDuration: 5 * 60 * 1000,
 }));
 // app.use(passport.initialize());
 // app.use(passport.session());
@@ -46,9 +44,17 @@ app.set("view engine", "handlebars");
 // app.enable('view cache');
 
 // Setting the root path
+
+// app.use("/", movieRoutes);
+// app.use("/", schedulesRoutes);
+// app.use("/", usersRoutes);
+
+// // app.use("/minu", minuRoutes);
+// app.use("/", fasRoutes);
+
 app.use("/movie", movieRoutes);
 app.use("/show", schedulesRoutes);
-app.use("/user", usersRoutes);
+app.use("/", usersRoutes);
 
 app.use("/theatre", minuRoutes);
 app.use("/", testRoutes);
