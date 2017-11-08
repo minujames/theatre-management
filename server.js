@@ -9,8 +9,8 @@ var movieRoutes = require("./controllers/moviesController.js");
 var schedulesRoutes = require("./controllers/schedulesController.js");
 var usersRoutes = require("./controllers/usersController.js");
 var minuRoutes = require("./controllers/minuController.js");
+var fasRoutes = require("./controllers/fasController.js")
 var testRoutes = require("./controllers/test.js");
-
 
 // Declaring port
 var port = process.env.PORT || 8080;
@@ -49,6 +49,7 @@ app.set("view engine", "handlebars");
 app.use("/movie", movieRoutes);
 app.use("/show", schedulesRoutes);
 app.use("/user", usersRoutes);
+
 app.use("/theatre", minuRoutes);
 app.use("/", testRoutes);
 
