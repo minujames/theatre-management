@@ -167,28 +167,39 @@
         globalreleaseYear = response.Year;
         var added = false;
         //check if movie is in db. if it is, change added to true, and store movieid in globalMovieId
-        if (added) {
-          $("#schedulebutton").show();
-        } else {
-          $("#addbutton").show();
-        }
+        $.get("theatre/api/movie/exists/" + (response.Title).toLowerCase(), function(data) {
+          if (data.length > 0) {
+            added = true
+            if (added === true) {
+              $("#schedulebutton").show();
+            } else {
+              $("#addbutton").show();
+            }
+          } else if (added === true) {
+            $("#schedulebutton").show();
+          } else {
+            $("#addbutton").show();
+          }
+        })
       })
     })
 
     $("#addbutton").on("click", function(event) {
       event.preventDefault();
-      $.post("/theatre/api/movie/", {title: globalTitle, releaseYear: globalreleaseYear})
+      $.post("/theatre/api/movie/", {title: globalTitle.toLowerCase(), releaseYear: globalreleaseYear}, function(data) {
+        console.log(data)
       $("#addbutton").hide();
       $("#schedulebutton").show();
+      })
     })
 
     $("#schedulebutton").on("click", function(event) {
       event.preventDefault();
       $("#addmoviesection").show();
       //get request search by movie title and get movieid
-      // $.get("/route", function(data) {
-      //   globalMovieId = data[0].MovieId;
-      // })
+      $.get("/theatre/api/movie/exists/" + globalTitle, function(data) {
+        globalMovieId = data[0].MovieId;
+      })
     })
 
     $("#checkschedulebutton").on("click", function(event) {
@@ -227,10 +238,12 @@
       $(".btn-danger").each(function() {
         var tempdate = $(this).attr("data-date");
         var temptime = $(this).attr("data-time");
-        var tempscreen = $(this).attr("data-screen")
-        // console.log(globaltitle, tempdate, temptime, tempscreen);
-        var tempobj = {MovieId: globalMovieId, date: tempdate, showtimeId: temptime, screenId: tempscreen};
-        $.post("/theatre/api/show", tempobj);
+        var tempscreen = $(this).attr("data-screen");
+        $.get("theatre/api/movie/exists/" + globalTitle, function(data) {
+          var tempobj = {MovieId: data[0].id, date: tempdate, showtimeId: temptime, screenId: tempscreen};
+          $.post("/theatre/api/show", tempobj);
+          location.reload();
+        })
       })
     })
 
