@@ -116,7 +116,7 @@ router.post("/", function (request, response) {
       request.session.username = username;
       request.session.role = role;
       console.log(request.session);
-      response.redirect("users/userlanding");
+      response.redirect("users/adminlanding");
       console.log("req session is ", request.session);
     } else {
       console.log("password not match");
