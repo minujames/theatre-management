@@ -48,7 +48,7 @@ router.get("/userlanding", function(request, response) {
 
     db.Reservation.findAll({
       where: {
-        UserId: '3'
+        UserId: request.session.userId
       },
       include: [{
         model: db.Show,
@@ -61,7 +61,8 @@ router.get("/userlanding", function(request, response) {
         movies: movies, 
         reservations: reservations,
         date: date,
-        username:request.session.username
+        username:request.session.username,
+        userId:request.session.userId,
       });
     });
   });  
