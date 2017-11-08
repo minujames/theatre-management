@@ -107,7 +107,7 @@ router.post("/", function (request, response) {
       request.session.username = username;
       request.session.role = role;
       console.log(request.session);
-      response.redirect("users/userlanding");
+      response.redirect("/userlanding");
       console.log("req session is ", request.session);
     }
     if (passwordHash.verify(password, hashedPassword) && role === 'admin') {
