@@ -147,11 +147,12 @@
 
           var dateSection = $("<section>").text(showObj.date);
           var screenSection = $("<h5>").text(showObj.Screen.name + " : " + showObj.ShowTime.name);
-          var seatsRemaining = $("<h5>").text("Available seats: " + availableSeats);
+          var seatsRemaining = $("<h5>").text("Available seats: " + availableSeats).attr({
+            "data-available-seats": availableSeats, "id": showObj.id + "-available"});
           var btnReserve = $("<button class='btn btn-primary reserve'>").text("Reserve Seats");
           
           show.append(dateSection, screenSection, seatsRemaining);
-          if(parseInt(availableSeats) === 0){
+          if(parseInt(availableSeats) <= 0){
             show.append($("<div class='houseFull'>").text("House Full"));
           }
           else{
@@ -175,17 +176,23 @@
     $(document).on("click", ".submitSeats" ,function(event){
       var showId = $(this).parent().attr("data-showId");
       var seatsToReserve = $("#" + showId + "-seats").val().trim();
+      var availableSeats = $("#" + showId + "-available").attr("data-available-seats");
 
-      $.ajax("/theatre/api/reservation", {
-        type: "POST",
-        data: {
-          UserId: 3,
-          ShowId: showId,
-          seatsReserved: seatsToReserve
-        }
-      }).then(function(){
-        location.reload();
-      });
+      if(parseInt(seatsToReserve) > parseInt(availableSeats)){
+        $("#" + showId + "-seats").val('');
+      }
+      else{
+        $.ajax("/theatre/api/reservation", {
+          type: "POST",
+          data: {
+            UserId: 3,
+            ShowId: showId,
+            seatsReserved: seatsToReserve
+          }
+        }).then(function(){
+          location.reload();
+        });
+      }
 
     });
   });
