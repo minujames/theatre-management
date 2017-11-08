@@ -22,14 +22,14 @@ if(request.session.username){
   }
 });
 
-router.get("/adminlanding", function (request, response) {
-  if(request.session.username){
-  console.log(request.session.username);
-  response.render("adminlanding",{username:request.session.username});
-  }else{
-    response.redirect("/");
-  }
-});
+// router.get("/adminlanding", function (request, response) {
+//   if(request.session.username){
+//   console.log(request.session.username);
+//   response.render("adminlanding",{username:request.session.username});
+//   }else{
+//     response.redirect("/");
+//   }
+// });
 
 router.get("/logout",function(request,response){
   if(request.session){
@@ -47,10 +47,10 @@ router.get("/signup", function (request, response) {
   });
 });
 
-router.get("/userlanding", function (request, response) {
+// router.get("/userlanding", function (request, response) {
 
-  response.render("userlanding",{username:request.session.username});
-})
+//   response.render("userlanding",{username:request.session.username});
+// })
 
 // router.get("/")
 
