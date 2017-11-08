@@ -91,7 +91,7 @@
     $.get("theatre/api/movie/comingsoon", function(data) {
       comingsoon = data;
       comingsoon.forEach(function(e) {
-        var temp = $("<button>").attr("class", "list-group-item text-left").attr("data-value", e.title).attr("data-id", e.id).html("<h5>" + e.title + " / " + e["Shows.minDate"] + "</h5>");
+        var temp = $("<button>").attr("class", "list-group-item text-left").attr("data-value", e.title).attr("data-id", e.id).html("<h5>" + e.title + "</h5>");
         $("#comingsoon").append(temp);
       })
     })
