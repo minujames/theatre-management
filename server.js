@@ -45,12 +45,16 @@ app.set("view engine", "handlebars");
 
 // Setting the root path
 
-app.use("/", movieRoutes);
-app.use("/", schedulesRoutes);
-app.use("/", usersRoutes);
+// app.use("/", movieRoutes);
+// app.use("/", schedulesRoutes);
+// app.use("/", usersRoutes);
 
-// app.use("/minu", minuRoutes);
-app.use("/", fasRoutes);
+// // app.use("/minu", minuRoutes);
+// app.use("/", fasRoutes);
+
+app.use("/movie", movieRoutes);
+app.use("/show", schedulesRoutes);
+app.use("/", usersRoutes);
 
 app.use("/theatre", minuRoutes);
 app.use("/", testRoutes);

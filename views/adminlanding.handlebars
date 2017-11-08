@@ -3,7 +3,7 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav navbar-left">
         <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Add a Movie</a></li>
+        <li class="nav-item"><a class="nav-link" href="/adminadd">Add a Movie</a></li>
       </ul>
       <ul class = "navbar-nav navbar-right pull-right">
         <li class="nav-item"><a class="nav-link pull-right" href="#">{{username}}</a></li>
@@ -22,9 +22,9 @@
         </div>
         <div class="row">
           <ul class="list-group" id="current">
-            {{#each currentmovies}}
-              <button class="list-group-item" data-value={{moviename}}>{{moviename}}</button>
-            {{/each}}
+{{!--             {{#each currentmovies}}
+              <button class="list-group-item" data-value={{title}}>{{title}}</button>
+            {{/each}} --}}
           </ul>
         </div><br>
 
@@ -33,9 +33,9 @@
         </div>
         <div class="row">
           <ul class="list-group" id="comingsoon">
-            {{#each comingsoonmovies}}
-              <button class="list-group-item" data-value={{moviename}}>{{moviename}}</button>
-            {{/each}}
+{{!--             {{#each comingsoonmovies}}
+              <button class="list-group-item" data-value={{title}}>{{title}}</button>
+            {{/each}} --}}
           </ul>
         </div>
       </div>
@@ -50,11 +50,10 @@
 
           <h1>Screen 1</h1>
           <div id="adminLandingScreen1">
-            <table>
+            <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th><h3>Start Date |</h3></th>
-                  <th><h3>End Date |</h3></th>
+                  <th><h3>Date</h3></th>
                   <th><h3>Time</h3></th>
                 </tr>
               </thead>
@@ -65,11 +64,10 @@
 
           <h1>Screen 2</h1>
           <div id="adminLandingScreen2">
-            <table>
+            <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th><h3>Start Date |</h3></th>
-                  <th><h3>End Date |</h3></th>
+                  <th><h3>Date</h3></th>
                   <th><h3>Time</h3></th>
                 </tr>
               </thead>
@@ -83,43 +81,57 @@
   </div>
 
   <script>
-    // var current = ["currentmovie1", "currentmovie2", "currentmovie3", "currentmovie4", "currentmovie5"];
-    // current.forEach(function(e) {
-    //   var temp = $("<button>").attr("class", "list-group-item").attr("data-value", e).text(e);
-    //   $("#current").append(temp);
-    // })
+    var current;
+    var comingsoon;
 
-    // var comingsoon = ["comingsoon1", "comingsoon2", "comingsoon3", "comingsoon4", "comingsoon5"];
-    // comingsoon.forEach(function(e) {
-    //   var temp = $("<button>").attr("class", "list-group-item").attr("data-value", e).text(e);
-    //   $("#comingsoon").append(temp);
-    // })
-
-    var schedule = [{screen: "screen1", startdate: "11/1", enddate: "11/11", time: "9:00am"}, {screen: "screen1", startdate: "11/1", enddate: "11/11", time: "12:00pm"}, {screen: "screen2", startdate: "11/2", enddate: "11/11", time: "9:00am"}, {screen: "screen2", startdate: "11/2", enddate: "11/11", time: "12:00pm"}]
-    $(".list-group-item").on("click", function(event) {
-      event.preventDefault();
-      $.get("/theatre/api/show/:movieId", function(data) {
-        console.log(data);
-        var schedule = data;
-        $("#tableScreen1").empty();
-        $("#tableScreen2").empty();
-        var title = $("<p>").html($(this).attr("data-value")).attr("class", "animated flash")
-        $("#adminLandingScreenMovieTitle").html(title)
-        schedule.forEach(function(e) {
-          var newrow = $("<tr>")
-          var start = $("<td>").html("<h4>"+e.startdate+"</h4>")
-          var end = $("<td>").html("<h4>"+e.enddate+"</h4>")
-          var time = $("<td>").html("<h4>"+e.time+"</h4>")
-          newrow.append(start, end, time)
-          if (e.screen === "screen1") {
-            $("#tableScreen1").append(newrow)
-          } else {
-            $("#tableScreen2").append(newrow)
-          }
-        })
+    $.get("theatre/api/movie/running", function(data) {
+      current = data;
+      current.forEach(function(e) {
+        var temp = $("<button>").attr("class", "list-group-item text-left").attr("data-value", e.title).attr("data-id", e.id).html("<h5>" + e.title + "</h5>");
+        $("#current").append(temp);
       })
     })
 
+    $.get("theatre/api/movie/comingsoon", function(data) {
+      comingsoon = data;
+      comingsoon.forEach(function(e) {
+        var temp = $("<button>").attr("class", "list-group-item text-left").attr("data-value", e.title).attr("data-id", e.id).html("<h5>" + e.title + " / " + e["Shows.minDate"] + "</h5>");
+        $("#comingsoon").append(temp);
+      })
+    })
+
+
+
+    // var schedule = [{screen: "screen1", startdate: "11/1", enddate: "11/11", time: "9:00am"}, {screen: "screen1", startdate: "11/1", enddate: "11/11", time: "12:00pm"}, {screen: "screen2", startdate: "11/2", enddate: "11/11", time: "9:00am"}, {screen: "screen2", startdate: "11/2", enddate: "11/11", time: "12:00pm"}]
+    function enable() {    
+      $(".list-group-item").on("click", function(event) {
+        event.preventDefault();
+        console.log("click")
+        var temp = $(this).attr("data-value")
+        $.get("/theatre/api/show/movie/" + $(this).attr("data-id"), function(data) {
+          console.log(data);
+          var schedule = data;
+          $("#tableScreen1").empty();
+          $("#tableScreen2").empty();
+          console.log(temp)
+          var title = $("<p>").html("Schedule for: " + temp).attr("class", "animated flash")
+          $("#adminLandingScreenMovieTitle").html(title)
+          schedule.forEach(function(e) {
+            var newrow = $("<tr>")
+            var date = $("<td>").html("<h4>"+e.date+"</h4>")
+            var time = $("<td>").html("<h4>"+e.ShowTime.name+"</h4>")
+            newrow.append(date, time)
+            if (e.screenId === 1) {
+              $("#tableScreen1").append(newrow)
+            } else {
+              $("#tableScreen2").append(newrow)
+            }
+          })
+        })
+      })
+    }
+
     var title = $("<p>").html("Click a Movie Title!").attr("class", "animated flash")
     $("#adminLandingScreenMovieTitle").html(title)
+    setTimeout(enable, 200);
   </script>

@@ -11,26 +11,22 @@ router.get("/login", function(request, response) {
 
 router.get("/authenticate", function(request, response) {
 
-  console.log("server....",request.body);
-
   response.redirect("/adminlanding");
 });
 
 router.get("/adminlanding", function(request, response) {
-  response.render("adminlanding");
+  response.render("adminlanding", {currentmovies: "#", comingsoonmovies: "#"});
 });
 
 router.get("/userlanding", function(request, response) {
 
   var date = "";
   if(request.query.date === undefined){
-    date = "2017-11-15";
-    // moment().format("YYYY-MM-DD");
+    date = moment().format("YYYY-MM-DD");
   }
   else{
     date = request.query.date;
   }
-  console.log("........date........", date);
 
   db.Movie.findAll({
     attributes: ['id', 'title'],
@@ -52,11 +48,8 @@ router.get("/userlanding", function(request, response) {
         include: [db.Movie, db.Screen, db.ShowTime]
       }]
     }).then(function(result) {
-      // response.json(result);
 
       var reservations = result;
-
-      console.log(date);
 
       response.render("userlanding_new", {
         movies: movies, 
@@ -64,17 +57,7 @@ router.get("/userlanding", function(request, response) {
         date: date
       });
     });
-  });
-
-  // db.Show.findAll({
-  //   where: {
-  //     date : request.params.date
-  //   },
-  //   include: [db.Movie, db.Screen, db.ShowTime]
-  // }).then(function(result) {
-  //   response.render("userlanding_new", {shows: result});
-  // });
-  
+  });  
 });
 
 router.get("/adminadd", function(request,response){
