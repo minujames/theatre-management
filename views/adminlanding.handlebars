@@ -14,7 +14,7 @@
 
       <div class="col-sm-2">
         <div class="row">
-          <h2>Current Movies</h2>
+          <h2>Currently Showing</h2>
         </div>
         <div class="row">
           <ul class="list-group" id="current">
@@ -25,7 +25,7 @@
         </div><br>
 
         <div class="row">
-          <h2>Coming soon</h2>
+          <h2>Coming Soon</h2>
         </div>
         <div class="row">
           <ul class="list-group" id="comingsoon">
@@ -44,7 +44,7 @@
             <h1 id="adminLandingScreenMovieTitle"></h1>
           </div><br>
 
-          <h1>Screen 1</h1>
+          <h2>Screen 1</h2>
           <div id="adminLandingScreen1">
             <table class="table table-bordered">
               <thead>
@@ -58,7 +58,7 @@
             </table>
           </div><br>
 
-          <h1>Screen 2</h1>
+          <h2>Screen 2</h2>
           <div id="adminLandingScreen2">
             <table class="table table-bordered">
               <thead>
@@ -107,12 +107,12 @@
           $("#tableScreen1").empty();
           $("#tableScreen2").empty();
           console.log(temp)
-          var title = $("<p>").html("Schedule for: " + temp).attr("class", "animated flash")
+          var title = $("<p>").html("Showtimes for: " + temp).attr("class", "animated flash")
           $("#adminLandingScreenMovieTitle").html(title)
           schedule.forEach(function(e) {
             var newrow = $("<tr>")
-            var date = $("<td>").html("<h4>"+e.date+"</h4>")
-            var time = $("<td>").html("<h4>"+e.ShowTime.name+"</h4>")
+            var date = $("<td>").html("<h5>"+e.date+"</h5>")
+            var time = $("<td>").html("<h5>"+e.ShowTime.name+"</h5>")
             newrow.append(date, time)
             if (e.screenId === 1) {
               $("#tableScreen1").append(newrow)
@@ -124,7 +124,7 @@
       })
     }
 
-    var title = $("<p>").html("Click a Movie Title!").attr("class", "animated flash")
+    var title = $("<p>").html("Select a title to view showtimes").attr("class", "animated flash")
     $("#adminLandingScreenMovieTitle").html(title)
     setTimeout(enable, 200);
   </script>
