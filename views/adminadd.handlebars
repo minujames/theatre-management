@@ -13,7 +13,7 @@
       <div class="col-sm-1"></div>
 
       <div class="col-sm-2">
-        <div class="row"><h1 class="animated flash">Add a Movie</h1></div><br>
+        <div class="row"><h1 class="animated flash">Search for Movie Information</h1></div><br>
         <div class="row">
           <form>
             <div class="form-group">
@@ -153,38 +153,43 @@
         url: "https://www.omdbapi.com/?t=" + movie + "&y=&plot&apikey=40e9cece",
         method: "GET"
       }).done(function(response) {
-        $("#movieposterhere").attr("src", response.Poster);
-        var title = $("<li>").html("<h4>Title: " + response.Title + "</h4>");
-        var runtime = $("<li>").html("<h4>Runtime: " + response.Runtime + "</h4>");
-        var release = $("<li>").html("<h4>Release Date: " + response.Released + ", Rating: " + response.Rated + "</h4>");
-        var genre = $("<li>").html("<h4>Genre: " + response.Genre);
-        var actors = $("<li>").html("<h4>Actors: " + response.Actors + "</h4>");
-        var plot = $("<li>").html("<h4>Plot: " + response.Plot + "</h4>");
-        $("#movieinfohere").append(title, runtime, release, genre, actors, plot);
-        $("#movietoadd").text("Scheduling " + response.Title).attr("class", "animated flash");
-        globalTitle = response.Title;
-        globalreleaseYear = response.Year;
-        var added = false;
-        $.get("theatre/api/movie/exists/" + (response.Title).toLowerCase(), function(data) {
-          if (data.length > 0) {
-            added = true
-            if (added === true) {
+        console.log(response.Title)
+        if (response.Title === undefined) {
+          return
+        } else {
+          $("#movieposterhere").attr("src", response.Poster);
+          var title = $("<li>").html("<h4>Title: " + response.Title + "</h4>");
+          var runtime = $("<li>").html("<h4>Runtime: " + response.Runtime + "</h4>");
+          var release = $("<li>").html("<h4>Release Date: " + response.Released + ", Rating: " + response.Rated + "</h4>");
+          var genre = $("<li>").html("<h4>Genre: " + response.Genre);
+          var actors = $("<li>").html("<h4>Actors: " + response.Actors + "</h4>");
+          var plot = $("<li>").html("<h4>Plot: " + response.Plot + "</h4>");
+          $("#movieinfohere").append(title, runtime, release, genre, actors, plot);
+          $("#movietoadd").text("Scheduling " + response.Title).attr("class", "animated flash");
+          globalTitle = response.Title;
+          globalreleaseYear = response.Year;
+          var added = false;
+          $.get("theatre/api/movie/exists/" + (response.Title).toLowerCase(), function(data) {
+            if (data.length > 0) {
+              added = true
+              if (added === true) {
+                $("#schedulebutton").show();
+              } else {
+                $("#addbutton").show();
+              }
+            } else if (added === true) {
               $("#schedulebutton").show();
             } else {
               $("#addbutton").show();
             }
-          } else if (added === true) {
-            $("#schedulebutton").show();
-          } else {
-            $("#addbutton").show();
-          }
-        })
+          })
+        }
       })
     })
 
     $("#addbutton").on("click", function(event) {
       event.preventDefault();
-      $.post("/theatre/api/movie/", {title: globalTitle.toLowerCase(), releaseYear: globalreleaseYear}, function(data) {
+      $.post("/theatre/api/movie/", {title: globalTitle, releaseYear: globalreleaseYear}, function(data) {
       $("#addbutton").hide();
       $("#schedulebutton").show();
       })
