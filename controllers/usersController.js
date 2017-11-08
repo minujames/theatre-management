@@ -6,13 +6,36 @@ var expressValidator = require("express-validator");
 var db = require("../models");
 //route for the root
 router.get("/", function (request, response) {
+  if(request.session.username){ 
+    if(request.session.role === "admin"){
+    response.redirect("/adminlanding");
+  }
+}
+if(request.session.username){ 
+  if(request.session.role === "user"){
+  response.redirect("/userlanding");
+  }
+}
+  else{
   response.render("login");
   console.log("req session is ", request.session);
+  }
 });
 
 router.get("/adminlanding", function (request, response) {
-  response.render("adminlanding");
+  if(request.session.username){
+  console.log(request.session.username);
+  response.render("adminlanding",{username:request.session.username});
+  }else{
+    response.redirect("/");
+  }
+});
 
+router.get("/logout",function(request,response){
+  if(request.session){
+  request.session.destroy();
+  }
+  response.redirect("/");
 })
 
 
@@ -25,10 +48,11 @@ router.get("/signup", function (request, response) {
 });
 
 router.get("/userlanding", function (request, response) {
-  response.render("userlanding");
+
+  response.render("userlanding",{username:request.session.username});
 })
 
-router.get("/")
+// router.get("/")
 
 router.post("/signup", function (request, response) {
   console.log(request.body);
@@ -54,7 +78,7 @@ router.post("/signup", function (request, response) {
     name: name,
     userName: username,
     passWord: hashedPassword,
-    role: "admin"
+    role: "user"
   }).then(function (tableData) {
     console.log(tableData);
     response.render("signupsuccessful");
@@ -89,6 +113,9 @@ router.post("/signup", function (request, response) {
 
 
 router.post("/", function (request, response) {
+  if(request.session.username){
+    response.redirect("/");
+  }
   var username = request.body.username;
   var password = request.body.password;
   db.User.findOne({
@@ -107,7 +134,7 @@ router.post("/", function (request, response) {
       request.session.username = username;
       request.session.role = role;
       console.log(request.session);
-      response.redirect("users/userlanding");
+      response.redirect("/userlanding");
       console.log("req session is ", request.session);
     }
     if (passwordHash.verify(password, hashedPassword) && role === 'admin') {
@@ -116,11 +143,11 @@ router.post("/", function (request, response) {
       request.session.username = username;
       request.session.role = role;
       console.log(request.session);
-      response.redirect("users/adminlanding");
+      response.redirect("/adminlanding");
       console.log("req session is ", request.session);
     } else {
       console.log("password not match");
-      response.redirect("/users");
+      response.redirect("/");
 
     }
   });

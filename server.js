@@ -2,15 +2,15 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var expressHandleBars = require("express-handlebars");
-var session = require("express-session");
+var session = require('client-sessions');
 var expressValidator = require("express-validator");
 
 var movieRoutes = require("./controllers/moviesController.js");
 var schedulesRoutes = require("./controllers/schedulesController.js");
 var usersRoutes = require("./controllers/usersController.js");
 var minuRoutes = require("./controllers/minuController.js");
+var fasRoutes = require("./controllers/fasController.js")
 var testRoutes = require("./controllers/test.js");
-
 
 // Declaring port
 var port = process.env.PORT || 8080;
@@ -31,11 +31,9 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(session({ 
   secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-     secure: true
-     }
+  cookieName: 'session',   
+	duration: 30 * 60 * 1000,    
+	activeDuration: 5 * 60 * 1000,
 }));
 // app.use(passport.initialize());
 // app.use(passport.session());
@@ -46,20 +44,16 @@ app.set("view engine", "handlebars");
 // app.enable('view cache');
 
 // Setting the root path
-<<<<<<< HEAD
-app.use("/movie", movieRoutes);
-app.use("/schedules", schedulesRoutes);
-app.use("/users", usersRoutes);
-app.use("/minu", minuRoutes);
-=======
 
 app.use("/", movieRoutes);
 app.use("/", schedulesRoutes);
 app.use("/", usersRoutes);
+
+// app.use("/minu", minuRoutes);
+app.use("/", fasRoutes);
+
 app.use("/theatre", minuRoutes);
 app.use("/", testRoutes);
-
->>>>>>> master
 
 // Listening on declared port
 db.sequelize.sync({ force: false }).then(function() {
