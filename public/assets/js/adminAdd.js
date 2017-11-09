@@ -59,7 +59,6 @@ $(document).ready(function(){
       url: "https://www.omdbapi.com/?t=" + movie + "&y=&plot&apikey=40e9cece",
       method: "GET"
     }).done(function(response) {
-      console.log(response.Title)
       if (response.Title === undefined) {
         return
       } else {
