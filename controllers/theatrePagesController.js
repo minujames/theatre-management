@@ -34,6 +34,13 @@ router.post("/", function (request, response) {
       userName: username
     }
   }).then(function (userData) {
+    console.log(userData);
+
+    if(userData === null){
+      console.log("Could not find User with the UserName and Password provided!");
+      return;
+    }
+
     var hashedPassword = (userData['dataValues'].passWord);
     var role = (userData['dataValues'].role);
     var id = (userData['dataValues'].id);

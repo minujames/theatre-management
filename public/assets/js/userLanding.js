@@ -30,7 +30,7 @@
       var releaseDate = $("<span>").text("Release Date: " + response.Released);
       var rated = $("<span>").text(" | Rated: " + response.Rated);
       var plot = $("<p>").html(response.Plot);
-      var btn = $("<btn class='btn btn-primary viewSchedule'>").text("View Schedules").attr("data-movieid", id);
+      var btn = $("<btn class='btn btn-primary viewSchedule'>").text("View Schedule").attr("data-movieid", id);
       var btnDiv = $("<div>").append(btn);
       div.append(img, title, releaseDate, rated, plot, btnDiv);
 
