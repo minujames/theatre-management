@@ -1,455 +1,71 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">User Landing page</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav navbar-left">
-        <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Add a Movie</a></li>
-      </ul>
-      <ul class = "navbar-nav navbar-right pull-right">
+    <a class="navbar-brand" href="#">Theatre Management User</a>
+    <ul class = "navbar-nav navbar-right pull-right">
         <li class="nav-item"><a class="nav-link pull-right" href="#"><span class="glyphicon glyphicon-user"></span> {{username}}</a></li>
          <li class="nav-item"><a class="nav-link pull-right" href="/logout">logout</a></li>
       </ul>
-    </div>
-  </nav><br><br><br>
-{{!-- 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-7">
+  </nav>
+
+  <div class="container">
+    <div class="row main-section">
+      <div class="col-md-12">
+        <span>Select date: </span>
+        <input id="date" data-date={{date}}>
+      </div>
+    </div>  
+
+    <div class="row main-section">
+      <div class="col-md-3 pageSections">
         <div class="row">
-          <p> Hey you , can you see me </p>
+          <div class="col-md-12" id="movieDiv">
+            <ul class="list-group shows">
+              <li class="list-group-item section-heading">
+                <h4>Movies</h4>
+              </li>
+              {{#each movies}}
+              {{> movies/movie-block}}
+              {{/each}}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </div> --}}
-  
 
-  <h5>      This is the User Landing Page</h5>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-1"></div>
-
-      <div class="col-sm-2">
+      <div class="col-md-5 pageSections">
         <div class="row">
-          <div class="form-group">
-            <button type="button" class="selectDate btn btn-success">Search Schedule</button>
-            <br><br>
-
-            <input id="startselect" type="date">
-            {{!-- <input id="endselect" type="date"> --}}
-            <button type="button" class="submitDate btn btn-success">Submit</button>
-            <button type="button" class="selectDate btn btn-success">Search Schedule</button>
+          <div class="col-md-12" id="summaryDiv">
+            <img id="cinema" src="/assets/images/cinema.jpg"></img>
           </div>
-          
-          <br><br>
-
-          <div id="userDate">
-          </div>
-          <br><br>
-          <h2 id="shows"></h2>
         </div>
-        
-        <div class="row">
-          <ul class="list-group" id="current">
-            {{#each movies}}
-              <button class="list-group-item" data-value={{moviename}}>{{moviename}}</button>
-            {{/each}}
-          </ul>
-        </div><br>
       </div>
 
-      <div class="col-sm-1"></div>
-
-      <div class="col-sm-7">
-        <div id="adminLandingShowScreen">
-          <div class="row">
-            <h1 id="adminLandingScreenMovieTitle"></h1>
-          </div><br>
-
-        <div class="col-sm-2">
-          <img src="#" id="movieposterhere" height="120">
-        </div>
-
-        <div class="col-sm-1"></div>
-          <div class="col-sm-6">
-        <div id="addmoviesection">
-          <h1 id="movietoadd"></h1>
-        </div>
-      </div>
+      <div class="col-md-4 pageSections">
         <div class="row">
-    <div class="col-sm-1"></div>
-
-    <div class="col-sm-4">
-      <ul class="list-group" id="movieinfohere">
-      </ul>
-
-          <table class="table">
-            <thead>
-              <tr>
-                <th></th>
-                <th id="scheduleTitle"></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td></td>
-
-                <td id="screenName1"></td>
-
-                <td id="screenName">Screen 1</td>
-
-                <td></td>
-              </tr>
-              <tr>
-                  <td>
-
-                    <button id="show1A" type="button" class="btn btn-secondary">9:00 AM</button> 
-                  </td>
-                  <td>
-                    <button id="show1B" type="button" class="btn btn-secondary">2:00 PM</button>
-                  </td>
-                  <td>
-                    <button id="show1C" type="button" class="btn btn-secondary">6:00 PM</button>
-                  </td>
-                  <td></td>
-                <td id="screenName2"></td>
-                <td></td>
-              </tr>
-              <tr>
-                  <td>
-                    <button id="show2A" type="button" class="btn btn-secondary">9:00 AM</button> 
-                  </td>
-                  <td>
-                    <button id="show2B" type="button" class="btn btn-secondary">2:00 PM</button>
-                  </td>
-                  <td>
-                    <button id="show2C" type="button" class="btn btn-secondary">6:00 PM</button>
-
-                    <button id="showA" type="button" class="btn btn-secondary">9:00 AM</button> 
-                  </td>
-                  <td>
-                    <button id="showB" type="button" class="btn btn-secondary">2:00 PM</button>
-                  </td>
-                  <td>
-                    <button id="showC" type="button" class="btn btn-secondary">6:00 PM</button>
-
-                  </td>
-              </tr>
-            </tbody>
-          </table>
-    </div>
-
-  </div>
-
-
-
-
-{{!-- 
-          <div class="btn-group" data-toggle="buttons">
-          <div class="form-check form-check-inline">
-            <label class="form-check-label">
-              
-            </label>
+          <div class="col-md-12" id="reservationDiv">
+            <ul class="list-group shows">
+              <li class="list-group-item section-heading">
+                <h4>Reservations</h4>
+              </li>
+              {{#each reservations}}
+              {{> reservations/reservation-block}}
+              {{/each}}
+            </ul>
           </div>
-        </div> --}}
-
-          
-          <div class="reservation">
-            <button type="button" class="btn btn-primary btn-lg btn-block" id="remainingSeats">Remaining Seats (Click to reserve)</button>
-            <button type="button" class="btn btn-secondary btn-lg btn-block" id="reservedSeats" disabled>Reserved Seats</button>
-          </div>
-
         </div>
       </div>
+      <input type="hidden" id="userIdInput" data-userid={{userId}}> 
     </div>
-  </div>
 
-   <script src="assets/js/users.js"></script>
-  <script>
+    <div id="showsModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Shows</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+         </div>
+       </div>
+     </div>
+   </div>
 
-
-
-  $("#startselect").hide();
-  $(".reservation").hide();
-
-  $(".submitDate").hide();
-  // $("#screenName1").hide();
-  // $("#screenName2").hide();
-  // $("#show1A").hide();
-  // $("#show1B").hide();
-  // $("#show1C").hide();
-  // $("#show2A").hide();
-  // $("#show2B").hide();
-  // $("#show2C").hide();
-
-  // $("#showTable1").hide();
-  // $("#showTable2").hide();
-  $("#screenName2").hide();
-
-  // $("#getinfobutton").on("click", function(event) {
-  //   event.preventDefault();
-  // })
-    // var today = moment().format('YYYY-MM-DD');
-
-  function search (searchKey, value, errorMessage) {
-    var searchKey;
-
-    if (searchKey === value) {
-      return value;
-    } else {
-      alert("Kindly enter correct input");
-    }
-  }
-
-
-    var schedule = [
-      {
-          "id": 1,
-          "title": "frozen",
-          "Shows": [
-              {
-                  "id": 1,
-                  "date": "2017-11-15",
-                  "screenId": 1,
-                  "showtimeId": 1,
-                  "MovieId": 1
-              }, {
-                  "id": 2,
-                  "date": "2017-11-15",
-                  "screenId": 2,
-                  "showtimeId": 1,
-                  "MovieId": 1
-              }
-          ]
-      }, {
-          "id": 3,
-          "title": "moana",
-          "Shows": [
-              {
-                  "id": 1,
-                  "date": "2017-11-14",
-                  "screenId": 1,
-                  "showtimeId": 1,
-                  "MovieId": 3
-              }
-          ]
-      }, 
-      {
-          "id": 2,
-          "title": "finding nemo",
-          "Shows": [
-              {
-                  "id": 7,
-                  "date": "2017-11-15",
-                  "screenId": 1,
-                  "showtimeId": 2,
-                  "MovieId": 2
-              }, {
-                  "id": 8,
-                  "date": "2017-11-15",
-                  "screenId": 2,
-                  "showtimeId": 2,
-                  "MovieId": 2
-              }
-          ]
-      }
-      ]
-
-
-
-
-    //function for displaying time
-
-    //search query, look for title and date, then return thre result.
-
-    function showTime() {
-      if (schedule[0].title === "frozen") {
-        if ((schedule[0].Shows[0].date === "2017-11-15") && (schedule[0].Shows[0].screenId === 1)) {
-          $("#screenName1").show();
-          $("#screenName1").html("Screen-1");
-
-        }
-         if ((schedule[0].Shows[0].date === "2017-11-15") && (schedule[0].Shows[0].screenId === 2)) {
-          $("#screenName2").html("Screen-2");
-          $("#screenName1").html("Screen-1");
-        }
-
-      }
-    }
-
-
-    }
-  }
-
-
-  var schedule = [
-    {
-        "id": 1,
-        "title": "frozen",
-        "Shows": [
-            {
-                "id": 1,
-                "date": "2017-11-15",
-                "screenId": 1,
-                "showtimeId": 1,
-                "MovieId": 1
-            }, {
-                "id": 2,
-                "date": "2017-11-15",
-                "screenId": 2,
-                "showtimeId": 1,
-                "MovieId": 1
-            }
-        ]
-    },
-    {
-        "id": 2,
-        "title": "finding nemo",
-        "Shows": [
-            {
-                "id": 7,
-                "date": "2017-11-15",
-                "screenId": 1,
-                "showtimeId": 2,
-                "MovieId": 2
-            }, {
-                "id": 8,
-                "date": "2017-11-15",
-                "screenId": 2,
-                "showtimeId": 2,
-                "MovieId": 2
-            }
-        ]
-    }
-    ]
-
-    // console.log(schedule[0].title);
-    // console.log(schedule[0].Shows[0].date);
-
-    var date = moment().format('YYYY-MM-DD');
-
-  // function displayShows(date) {
-    $("#current").empty();
-    $("#userDate").html(date);
-
-
-    var current = [];
-    // var movieId = [];
-
-    // console.log(date);
-
-    // for (var i = 0; i < schedule.length; i++) {
-    //   for (var j = 0; j < schedule[i].length; j++) {
-    //     if (date === schedule[i].Shows[j].date) {
-    //       current.push(schedule[i].title);
-    //       movieId.push(schedule[i].Shows[j].MovieId);
-    //       console.log(movieId);
-    //   }
-    //   }
-    // }
-    for (var i = 0; i < schedule.length; i++) {
-      current.push(schedule[i].title);
-      
-    }
-
-    $("#shows").html("Today Shows")
-
-    // var date = $("#startselect").attr("value", "moment().format('YYYY-MM-DD')");
-    var date = moment().format('YYYY-MM-DD');
-    $("#userDate").append(date);
-
-    var current = [];
-
-    for (var i = 0; i < schedule.length; i++) {
-      current.push(schedule[i].title);
-    }
-
-    $("#shows").append("Today Shows")
-
-    current.forEach(function(e) {
-      var temp = $("<button>").attr("class", "list-group-item").attr("data-value", e).text(e);
-      $("#current").append(temp);
-    })
-
-    $(".list-group-item").on("click", function(event) {
-      event.preventDefault();
-      $("#tableCurrent").empty();
-      // $("#tableComingSoon").empty();
-      var title = $("<p>").html($(this).attr("data-value")).attr("class", "animated flash")
-      $("#adminLandingScreenMovieTitle").html(title)
-
-      var name = $(this).attr("data-value")
-
-      // var title = $("<p>").html("Click a Movie Title!").attr("class", "animated flash")
-      // $("#adminLandingScreenMovieTitle").html(title)
-
-    $("#movieinfohere").empty();
-    // var movie = $("#movietitle").val().trim();
-    // $("#movietitle").val("")
-
-      console.log(name);
-      console.log($(this).attr("data-value"));        
-      $.ajax({
-      url: "https://www.omdbapi.com/?t=" + name + "&y=&plot&apikey=40e9cece",
-      method: "GET"
-    }).done(function(response) {
-      $("#movieposterhere").attr("src", response.Poster);
-      var movietitle = $("<li>").html("<h4>Title: " + response.Title + "</h4>");
-      // console.log("I am running");
-      // var release = $("<li>").html("<h4>Release Date: " + response.Released + ", Rating: " + response.Rated + "</h4>");
-      var genre = $("<li>").html("<h4>Genre: " + response.Genre);
-      // var actors = $("<li>").html("<h4>Actors: " + response.Actors + "</h4>");
-      // var plot = $("<li>").html("<h4>Plot: " + response.Plot + "</h4>");
-      $("#movieinfohere").append(movietitle,  genre);
-      $("#scheduleTitle").html(response.Title);
-        // , release, actors, plot);
-      // $("#movietoadd").text("Adding " + response.Title).attr("class", "animated flash");
-      // $("#addbutton").show();
-      })  
-    })
-
-
-
-    // $(".selectDate").on("click", function(event) {
-    //   $("#startselect").show();
-    //   $(".submitDate").show();
-        
-    //     $(".submitDate").on("click", function(click) {
-    //       var dateSelected = $("#startselect").val();
-    //       var dateSearch = schedule[0].Shows[0].date;
-    //       console.log(dateSearch);
-    //       console.log(dateSelected);
-
-    //       var errorMessage = "No movies on display on mentioned Date! \n Kindly check again";
-
-    //       search(dateSearch, dateSelected, errorMessage);
-
-    //       // displayShows(dateSelected);
-    //     })
-      
-    // })
-
-    // function(search1, search2, search3,result){
-
-    // }
-
-
-    // $(".selectDate").on("click", function(event) {
-    //   $("#startselect").show();
-        
-    //     $("dateSubmit").on("click", function(click) {
-    //       var dateSelected = $("#startselect").val();
-    //       var dateSearch = schedule.Shows.date;
-
-    //       var errorMessage = "No movies on display on mentioned Date! \n Kindly check again"
-
-    //       search(dateSearch, dateSelected, errorMessage);
-
-          
-    //     })
-      
-    // })
-
-
-  </script>
-
+ </div>
