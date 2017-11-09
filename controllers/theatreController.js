@@ -18,6 +18,9 @@ router.get("/api/showtime", function(request, response) {
 
 //--------------------------------MOVIE----------------------------------------
 
+ // [admin add/schedule page]
+ // Find a movie by title
+ // [GET: http://localhost:3000/theatre/api/movie/exists/moana]
 router.get("/api/movie/exists/:title", function(request, response) {
   db.Movie.findAll({
     where: {

@@ -126,6 +126,7 @@ router.post("/", function (request, response) {
     console.log(userData['dataValues']);
     var hashedPassword = (userData['dataValues'].passWord);
     var role = (userData['dataValues'].role);
+    var id = (userData['dataValues'].id);
     console.log("the hashed password is " + hashedPassword);
     console.log(passwordHash.verify(password, hashedPassword));
     if (passwordHash.verify(password, hashedPassword) && role === 'user') {
@@ -133,6 +134,7 @@ router.post("/", function (request, response) {
       console.log("logged in as a user");
       request.session.username = username;
       request.session.role = role;
+      request.session.userId = id;
       console.log(request.session);
       response.redirect("/userlanding");
       console.log("req session is ", request.session);
@@ -142,6 +144,7 @@ router.post("/", function (request, response) {
       console.log("logged in as an administrator")
       request.session.username = username;
       request.session.role = role;
+      request.session.userId = id;
       console.log(request.session);
       response.redirect("/adminlanding");
       console.log("req session is ", request.session);

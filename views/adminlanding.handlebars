@@ -18,7 +18,7 @@
 
       <div class="col-sm-2">
         <div class="row">
-          <h2>Currently Showing</h2>
+          <h2 class="adminHeaders">Currently Showing</h2>
         </div>
         <div class="row">
           <ul class="list-group" id="current">
@@ -29,7 +29,7 @@
         </div><br>
 
         <div class="row">
-          <h2>Coming Soon</h2>
+          <h2 class="adminHeaders">Coming Soon</h2>
         </div>
         <div class="row">
           <ul class="list-group" id="comingsoon">
@@ -48,7 +48,7 @@
             <h1 id="adminLandingScreenMovieTitle"></h1>
           </div><br>
 
-          <h2>Screen 1</h2>
+          <h2 class="adminHeaders">Screen 1</h2>
           <div id="adminLandingScreen1">
             <table class="table table-bordered">
               <thead>
@@ -62,7 +62,7 @@
             </table>
           </div><br>
 
-          <h2>Screen 2</h2>
+          <h2 class="adminHeaders">Screen 2</h2>
           <div id="adminLandingScreen2">
             <table class="table table-bordered">
               <thead>
@@ -111,7 +111,8 @@
           $("#tableScreen1").empty();
           $("#tableScreen2").empty();
           console.log(temp)
-          var title = $("<p>").html("Showtimes for: " + temp).attr("class", "animated flash")
+          var title = $("<p>").html("Showtimes for: " + temp).addClass("adminHeaders", "animated flash");
+          // attr("class", "animated flash")
           $("#adminLandingScreenMovieTitle").html(title)
           schedule.forEach(function(e) {
             var newrow = $("<tr>")
@@ -128,7 +129,8 @@
       })
     }
 
-    var title = $("<p>").html("Select a title to view showtimes").attr("class", "animated flash")
+    var title = $("<p>").html("Select a title to view showtimes").addClass("adminHeaders", "animated flash");
+    // attr("class", "animated flash");
     $("#adminLandingScreenMovieTitle").html(title)
     setTimeout(enable, 200);
   </script>
