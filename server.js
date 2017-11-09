@@ -8,7 +8,7 @@ var expressValidator = require("express-validator");
 var movieRoutes = require("./controllers/moviesController.js");
 var schedulesRoutes = require("./controllers/schedulesController.js");
 var usersRoutes = require("./controllers/usersController.js");
-var minuRoutes = require("./controllers/minuController.js");
+var minuRoutes = require("./controllers/theatreController.js");
 var fasRoutes = require("./controllers/fasController.js")
 var testRoutes = require("./controllers/test.js");
 
