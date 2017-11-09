@@ -6,7 +6,7 @@ $(document).ready(function(){
   $.get("theatre/api/movie/running", function(data) {
     current = data;
     current.forEach(function(e) {
-      var temp = $("<button>").attr("class", "list-group-item text-left").attr("data-value", e.title).attr("data-id", e.id).html("<h5>" + e.title + "</h5>");
+      var temp = $("<button>").attr("class", "list-group-item text-left adminMovieListItem").attr("data-value", e.title).attr("data-id", e.id).html("<h5>" + e.title + "</h5>");
       $("#current").append(temp);
     })
   })
@@ -14,22 +14,21 @@ $(document).ready(function(){
   $.get("theatre/api/movie/comingsoon", function(data) {
     comingsoon = data;
     comingsoon.forEach(function(e) {
-      var temp = $("<button>").attr("class", "list-group-item text-left").attr("data-value", e.title).attr("data-id", e.id).html("<h5>" + e.title + "</h5>");
+      var temp = $("<button>").attr("class", "list-group-item text-left adminMovieListItem").attr("data-value", e.title).attr("data-id", e.id).html("<h5>" + e.title + "</h5>");
       $("#comingsoon").append(temp);
     })
   })
 
   function enable() {    
-    $("button.list-group-item").on("click", function(event) {
+    $(".adminMovieListItem").on("click", function(event) {
       event.preventDefault();
-      console.log("click")
+      
       var temp = $(this).attr("data-value")
       $.get("/theatre/api/show/movie/" + $(this).attr("data-id"), function(data) {
-        console.log(data);
         var schedule = data;
         $("#tableScreen1").empty();
         $("#tableScreen2").empty();
-        console.log(temp)
+
         var title = $("<p>").html("Showtimes for: " + temp).addClass("adminHeaders", "animated flash");
           $("#adminLandingScreenMovieTitle").html(title)
           schedule.forEach(function(e) {
