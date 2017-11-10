@@ -18,6 +18,8 @@ All these results are sorted and displayed or user view.
 
 When the user logs on the website, they can see the movies currently playing and those scheduled for the future. By selecting the movie, they can see its schedule and reserve their seats based on availability.
 
+The website runs on a database having many to many relationship in implementation.
+
 
 # Technologies for building app
 
@@ -39,9 +41,9 @@ When the user logs on the website, they can see the movies currently playing and
 * [Sequeilze](https://www.npmjs.com/package/sequelize) - Sequelize is a promise-based Node.js ORM for Postgres, MySQL, SQLite and Microsoft SQL Server
 
 
-## Authors
+## App Developers
 
-participant of this project.
+Contributors of this project.
 
 * **Minu James** - *Back-End: Modeling + relating database, bulding queries and implementing routes for the website*
 * **Sairam Jalakam** - *Back-End: Password Storage / Session Manager implementation*
