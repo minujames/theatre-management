@@ -18,7 +18,7 @@ All these results are sorted and displayed or user view.
 
 When the user logs on the website, they can see the movies currently playing and those scheduled for the future. By selecting the movie, they can see its schedule and reserve their seats based on availability.
 
-The website runs on a database having many to many relationship in implementation.
+The app runs on a database having many to many relationship in implementation.
 
 
 # Technologies for building app
