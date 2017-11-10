@@ -14,11 +14,11 @@ It enables the theatre owner to manage multiple screens by scheduling different 
 
 Firstly, the app carries out a movie search and displays its poster along with release date and plot. The admin can then schedule it on a range of dates by selecting different time slots for it.
 
-All these results are sorted and displayed or user view.
+All these entries are sorted and displayed or user view.
 
-When the user logs on the website, they can see the movies currently playing and those scheduled for the future. By selecting the movie, they can see its schedule and reserve their seats based on availability.
+When the user sign up / log on the website, they can see the movies currently playing and those scheduled for the future. By selecting the movie, they can see its schedule and reserve their seats based on availability.
 
-The app runs on a database having many to many relationship in implementation.
+The app runs on a database having many to many relationship.
 
 
 # Technologies for building app
