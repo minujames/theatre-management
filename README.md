@@ -5,7 +5,7 @@ The theatre owner has to login with his credentials to view and manage movie sch
 
 The user/visitor has to subscribe to view the movie schedules. By default, today's date is selected for displaying current movies on display
 
-## demo: https://www.youtube.com/watch?v=aP2fLZ_2Y74
+## [Website Demo](https://www.youtube.com/watch?v=aP2fLZ_2Y74) - click the link to view
 
 # Motivation
 This app was created to give a one-step solution for the theatre owners and movie enthusiasts. 
