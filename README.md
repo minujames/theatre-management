@@ -41,9 +41,7 @@ The website runs on a database having many to many relationship in implementatio
 * [Sequeilze](https://www.npmjs.com/package/sequelize) - Sequelize is a promise-based Node.js ORM for Postgres, MySQL, SQLite and Microsoft SQL Server
 
 
-## App Developers
-
-Contributors of this project.
+# App Developers
 
 * **Minu James** - *Back-End: Modeling + relating database, bulding queries and implementing routes for the website*
 * **Sairam Jalakam** - *Back-End: Password Storage / Session Manager implementation*
