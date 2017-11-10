@@ -26,6 +26,7 @@ The app runs on a database having many to many relationship in implementation.
 ## HTML Libraries
 * [Bootstrap](http://getbootstrap.com/) -  Front-end component library
 * [jQuery](http://api.jquery.com/) - The Javascript library used.
+* [Handlebars.js](http://handlebarsjs.com/) - Popular templating engine that is powerful, simple to use and has a large community.
 
 ## APIs
 * [IMDB](http://www.omdbapi.com/) - The OMDb API is a RESTful web service to obtain movie information
