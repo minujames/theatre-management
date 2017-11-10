@@ -31,7 +31,7 @@ When the user logs on the website, they can see the movies currently playing and
 ## Runtime Libraries
 * [Node.js®](https://nodejs.org/en/) - JavaScript runtime built on Chrome's V8 JavaScript engine
 * [Password Hash](https://www.npmjs.com/package/password-hash) - node.js library to simplify use of hashed passwords
-* [express] {https://www.npmjs.com/package/express} - Fast, unopinionated, minimalist web framework for node.
+* [express] (https://www.npmjs.com/package/express) - Fast, unopinionated, minimalist web framework for node.
 * [body-parser](https://www.npmjs.com/package/body-parser) - Node.js body parsing middleware
 * [express-handlebars](https://www.npmjs.com/package/express-handlebars) - A Handlebars view engine for Express
 * [client-sessions](https://www.npmjs.com/package/client-sessions) - client-sessions is connect middleware that implements sessions in encrypted tamper-free cookies
