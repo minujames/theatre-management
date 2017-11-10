@@ -1,4 +1,4 @@
-# theatre-management
+# Theatre-Management
 This app enables theatre owners to manage movie schedule and let the visitors know which movies are currently playing and scheduled to play in the future.
 
 The theatre owner has to login with his credentials to view and manage movie schedule for display on multiple screens in multiple time slots.
@@ -38,5 +38,4 @@ When the user logs on the website, they can see the movies currently playing and
 * [experss-validator](https://www.npmjs.com/package/express-validator) - An express.js middleware for validator.
 * [Sequeilze](https://www.npmjs.com/package/sequelize) - Sequelize is a promise-based Node.js ORM for Postgres, MySQL, SQLite and Microsoft SQL Server
 
-## Node.js
 
