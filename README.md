@@ -39,3 +39,11 @@ When the user logs on the website, they can see the movies currently playing and
 * [Sequeilze](https://www.npmjs.com/package/sequelize) - Sequelize is a promise-based Node.js ORM for Postgres, MySQL, SQLite and Microsoft SQL Server
 
 
+## Authors
+
+participant of this project.
+
+* **Minu James** - *Back-End: Modeling database and routes for the website*
+* **Sairam Jalakam** - *Back-End: Password Storage / Session Manager implementation*
+* **Derrick Lee** - *Front-End: Website Layout, Admin landing page and its complete functionality
+* **Fawaz Ahmed** - *Front-End: User Landing Page and its functionality
