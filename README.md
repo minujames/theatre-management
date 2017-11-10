@@ -45,5 +45,5 @@ participant of this project.
 
 * **Minu James** - *Back-End: Modeling database and routes for the website*
 * **Sairam Jalakam** - *Back-End: Password Storage / Session Manager implementation*
-* **Derrick Lee** - *Front-End: Website Layout, Admin landing page and its complete functionality
-* **Fawaz Ahmed** - *Front-End: User Landing Page and its functionality
+* **Derrick Lee** - *Front-End: Website Layout, Admin landing page and its complete functionality*
+* **Fawaz Ahmed** - *Front-End: User Landing Page and its functionality*
