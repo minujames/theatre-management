@@ -101,7 +101,7 @@ router.get("/adminlanding", function(request, response) {
 });
 
 router.get("/adminadd", function(request,response){
-  response.render("adminadd");
+  response.render("adminadd", {username:request.session.username});
 });
 
 router.get("/userlanding", function(request, response) {
