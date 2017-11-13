@@ -226,6 +226,29 @@ router.get("/api/show/:date/:movieId", function(request, response) {
   });
 });
 
+// [admin add/schedule page]
+// Adds multiple shows to the database 
+// [POST: http://localhost:3000/theatre/api/show/bulk]
+router.post("/api/show/bulk", function(request, response) {
+  // [{
+  //   "date": "2017-11-06",
+  //   "screenId": "2",
+  //   "MovieId": "3",
+  //   "showtimeId": "1"
+  // },
+  // {
+  //   "date": "2017-11-06",
+  //   "screenId": "2",
+  //   "MovieId": "3",
+  //   "showtimeId": "2"
+  // }]
+
+  console.log("----------------------", request.body, "----------------");
+  db.Show.bulkCreate(request.body.shows).then(function(result) {
+    response.json(result);
+  });
+});
+
 //------------------------------RESERVATION------------------------------------------
 
 // [User reservation]

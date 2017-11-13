@@ -136,17 +136,35 @@ $(document).ready(function(){
   $("#submitschedule").on("click", function(event) {
     event.preventDefault();
 
-    $(".btn-danger").each(function() {
-      var tempdate = $(this).attr("data-date");
-      var temptime = $(this).attr("data-time");
-      var tempscreen = $(this).attr("data-screen");
-      $.get("theatre/api/movie/exists/" + globalTitle, function(data) {
+    // $(".btn-danger").each(function() {
+    //   var tempdate = $(this).attr("data-date");
+    //   var temptime = $(this).attr("data-time");
+    //   var tempscreen = $(this).attr("data-screen");
+    //   $.get("theatre/api/movie/exists/" + globalTitle, function(data) {
+    //     var tempobj = {MovieId: data[0].id, date: tempdate, showtimeId: temptime, screenId: tempscreen};
+    //     $.post("/theatre/api/show", tempobj);
+    //   })
+    //   setTimeout(function() {location.reload()}, 600);
+    // })
+    var objArray = [];
+
+    $.get("theatre/api/movie/exists/" + globalTitle, function(data) {
+      $(".btn-danger").each(function() {
+        var tempdate = $(this).attr("data-date");
+        var temptime = $(this).attr("data-time");
+        var tempscreen = $(this).attr("data-screen");
+
         var tempobj = {MovieId: data[0].id, date: tempdate, showtimeId: temptime, screenId: tempscreen};
-        $.post("/theatre/api/show", tempobj);
-      })
-      setTimeout(function() {location.reload()}, 200);
-    })
-  })
+        objArray.push(tempobj);
+      });
+
+      if(objArray.length > 0){
+        $.post("/theatre/api/show/bulk", {shows: objArray}, function(insertedShows) {
+          location.reload();
+        });
+      }
+    });
+  });
 
   reset();
 });
