@@ -243,7 +243,6 @@ router.post("/api/show/bulk", function(request, response) {
   //   "showtimeId": "2"
   // }]
 
-  console.log("----------------------", request.body, "----------------");
   db.Show.bulkCreate(request.body.shows).then(function(result) {
     response.json(result);
   });
