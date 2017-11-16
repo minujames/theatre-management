@@ -44,7 +44,7 @@ The app runs on a database having many to many relationship.
 
 # App Developers
 
-* **Minu James** - *Back-End: Modeling + relating database, bulding queries and implementing routes for the website*
-* **Sairam Jalakam** - *Back-End: Password Storage / Session Manager implementation*
-* **Derrick Lee** - *Front-End: Website Layout, Admin landing page and its complete functionality*
-* **Fawaz Ahmed** - *Front-End: User Landing Page and its functionality*
+* **Minu James** (https://github.com/minujames)
+* **Sairam Jalakam** (https://github.com/jalakamsairam)
+* **Derrick Lee** (https://github.com/FEEDKurumu)
+* **Fawaz Ahmed** (https://github.com/fawazahmed86)
